@@ -131,8 +131,8 @@ public class UserAction extends BaseAction {
             return;
         }
         try {
-            User user = userService.FindByID(Integer.getInteger(id));
-            user.setIdentity(1);
+            User user = userService.FindByID(Integer.parseInt(id));
+            user.setDeleteFlag(1);
             userService.updateUser(user);
         } catch (Exception e) {
             System.out.println("深层调用导致删除失败");
@@ -192,6 +192,7 @@ public class UserAction extends BaseAction {
         }
         if(userList.size() == 1){
             System.out.println("登陆成功");
+            session.put("user",userList.get(0));
             out.print(CommonKey.LOGINSUCCESS); // 登陆成功
         }else {
             System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");

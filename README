@@ -3,25 +3,34 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 1. createUser
-
-http://localhost:8080/user/createUser?accountName=yang&nickName=yi&realName=yangyi&age=1&sex=1&IDcard=1234567890121&password=yangyi&identity=2
+http://localhost:8080/user/createUser?accountName=yang&realName=yangyi&password=yangyi&identity=1
+参数        accountName：用户名 realName：真实名字   password：密码     identity：1 普通用户 2 管理员
+返回值      0101：创建成功
 
 2. updateUser
-
-http://localhost:8080/user/updateUser?id=1&accountName=yang0&nickName=yi0&realName=yangyi0&age=2&sex=0&IDcard=1234567890120&password=yangyi0&identity=0
+http://localhost:8080/user/updateUser?id=1&accountName=yang0&realName=yangyi0&identity=2&password=0
+参数       id:用户ID   accountName：用户名   realName：真实名字   password：密码     identity：1 普通用户 2 管理员
+返回值      0105：更新成功
 
 3. deleteUser
 http://localhost:8080/user/deleteUser?id=1
+参数      id:用户ID
+返回值     0103：删除成功
 
 4. login
 http://localhost:8080/user/login?accountName=yang&password=yangyi
+参数       accountName：用户名       password：密码
+返回值     1103：登陆成功   1104：登陆失败
 
 5. logout
 http://localhost:8080/user/logout
+返回值     1105：退出登陆成功
 
 6.pageingUser
 http://localhost:8080/user/pageingUser?PageNo=1&identity=1
+参数       PageNo: 分页码     identity：用户身份 1或者是2
+返回值     {"pageSize":5,"pageNo":1,"rowCount":1,"result":[{"id":1,"accountName":"yang0","realName":"yangyi0","password":"0","identity":1,"deleteFlag":1}]}
 
 7.isLogin
 http://localhost:8080/user/isLogin
-
+返回值：{"id":1,"accountName":"yang0","realName":"yangyi0","password":"0","identity":1,"deleteFlag":1}
