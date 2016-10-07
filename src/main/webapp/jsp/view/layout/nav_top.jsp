@@ -1,0 +1,83 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">信息管理系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul id="topMenuList" class="nav navbar-nav">
+                <li><a href="">测试方案</a></li>
+                <li><a href="">FAQ</a></li>
+                <li><a href="">视频教学</a></li>
+                <li><a href="">文档资料</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="modal" data-target="#loginModal"
+                       data-whatever="@mdo">登录</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid --> </nav>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+     aria-labelledby="loginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group  ">
+                        <label id="error" style="color: red;text-align: center;"
+                               class="control-label col-sm-10"></label>
+                    </div>
+                    <div class="form-group  ">
+                        <label class="control-label col-sm-3">用户名：</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="mailLogin"
+                                   aria-describedby="mailStatus">
+                        </div>
+                    </div>
+                    <div class="form-group  ">
+                        <label class="control-label col-sm-3">密码：</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="passwordLogin"
+                                   aria-describedby="passwordStatus">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary"
+                        onclick="">登录
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
