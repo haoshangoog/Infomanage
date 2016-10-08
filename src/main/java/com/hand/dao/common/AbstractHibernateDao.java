@@ -43,8 +43,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements
 		return list;
 	}
 
-	public void Create(T model) {
-		getCurrentSession().save(model);
+	public Serializable Create(T model) {
+		return getCurrentSession().save(model);
 	}
 
 	public T Update(T model) {

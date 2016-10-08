@@ -17,6 +17,9 @@
 	<package name="user" namespace="/user" extends="struts-default">
 		<action name="*"  class="userAction" method="{1}" ></action>
 	</package>
+	<package name="testPlan" namespace="/testPlan" extends="struts-default">
+		<action name="*"  class="testPlanAction" method="{1}" ></action>
+	</package>
 
 
 </struts>

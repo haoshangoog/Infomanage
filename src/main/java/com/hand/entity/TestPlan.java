@@ -22,6 +22,10 @@ public class TestPlan implements Serializable {
     @Expose
     private String planname;
 
+    @Column(name="deleteflag")
+    @Expose
+    private Integer deleteFlag = 0; // 删除标志符	  0 代表false 1 代表true-已删除
+
     public int getId() {
         return id;
     }
@@ -36,5 +40,13 @@ public class TestPlan implements Serializable {
 
     public void setPlanname(String planname) {
         this.planname = planname;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

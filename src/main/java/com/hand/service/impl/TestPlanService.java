@@ -1,7 +1,9 @@
 package com.hand.service.impl;
 
+import com.hand.dao.ITestPlanCatalogueDao;
 import com.hand.dao.ITestPlanDao;
 import com.hand.entity.TestPlan;
+import com.hand.entity.TestPlanCatalogue;
 import com.hand.service.ITestPlanService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +17,13 @@ public class TestPlanService implements ITestPlanService {
 
     @Resource(name = "testPlanDao")
     private ITestPlanDao testPlanDao;
+    @Resource(name = "testPlanCatalogueDao")
+    private ITestPlanCatalogueDao testPlanCatalogueDao;
 
     @Override
     public void createTestPlan(TestPlan testPlan) throws Exception {
-        testPlanDao.Create(testPlan);
+        int id = (int) testPlanDao.Create(testPlan);
+        testPlanCatalogueDao.Create(new TestPlanCatalogue("",0,0,id));
     }
 
     @Override
