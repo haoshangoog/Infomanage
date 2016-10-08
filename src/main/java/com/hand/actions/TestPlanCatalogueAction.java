@@ -1,11 +1,9 @@
 package com.hand.actions;
 
 import com.hand.commonKey.CommonKey;
-import com.hand.entity.TestPlan;
 import com.hand.entity.TestPlanCatalogue;
 import com.hand.paging.PagingService;
 import com.hand.service.ITestPlanCatalogueService;
-import com.hand.service.ITestPlanService;
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;

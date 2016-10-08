@@ -53,17 +53,22 @@ http://localhost:8080/testPlan/deleteTestPlan?planNameId=1
 参数      planNameId：测试方案Id
 返回值     0103：删除成功
 
-4. createTestPlanCatalogue 创建子目录
+4. pageingTestPlan 分页测试方案
+http://localhost:8080/testPlan/pageingTestPlan?pageNo=1&pageSize=5&deleteflag=0
+参数      pageNo：当前页      pageSize：每页的条数      deleteflag：选择删除的测试方案还是未删除的（不写代表是没有删除的）
+返回值     json 字符串
+
+5. createTestPlanCatalogue 创建子目录
 http://localhost:8080/testPlanCatalogue/createTestPlanCatalogue?catalogueName=目录1&parentsId=1&sequence=1
 参数      catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列
 返回值     0101：创建成功
 
-5. createTestPlanCatalogue 更新子目录
+6. createTestPlanCatalogue 更新子目录
 http://localhost:8080/testPlanCatalogue/updateTestPlanCatalogue?catalogueId=3&catalogueName=目录1&parentsId=2&sequence=2
 参数      catalogueId：目录的id    catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列
 返回值      0105：更新成功
 
-6. deleteTestPlanCatalogue 删除子目录
+7. deleteTestPlanCatalogue 删除子目录
 http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
 参数      catalogueId：目录的id
 返回值     0103：删除成功

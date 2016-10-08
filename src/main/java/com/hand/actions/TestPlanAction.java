@@ -1,13 +1,20 @@
 package com.hand.actions;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hand.commonKey.CommonKey;
 import com.hand.entity.TestPlan;
+import com.hand.paging.Pager;
 import com.hand.paging.PagingService;
 import com.hand.service.ITestPlanService;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;
+
+import static com.hand.commonKey.CommonKey.PAGESIZE;
 
 public class TestPlanAction extends BaseAction {
 
@@ -111,5 +118,36 @@ public class TestPlanAction extends BaseAction {
         }
         System.out.println("删除成功");
         out.print(CommonKey.DELETESUCCESS);
+    }
+
+    public void pageingTestPlan() throws Exception {
+        System.out.print("---》pageingTestPlan 方法");
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        // 测试方案 的分页查询
+        String pageNo   = request.getParameter("pageNo");
+        String pageSize = request.getParameter("pageSize");
+        String deleteflag = request.getParameter("deleteflag");
+
+        if(pageNo==null || pageSize == null){
+            System.out.println("由于参数导致创建失败--pageNo / pageSize 缺失");
+            out.print(CommonKey.PARAMETERDEFICIENCY);
+            return;
+        }
+
+        Criterion criterion = null;
+        if(deleteflag!=null){
+            criterion =  Restrictions.eq("deleteFlag",Integer.parseInt(deleteflag));
+        }else{
+            criterion =  Restrictions.eq("deleteFlag",0);
+        }
+        pagingTestPlanService.PagingService(TestPlan.class);
+        Pager pager = pagingTestPlanService.paging(Integer.parseInt(pageNo),Integer.parseInt(pageSize),criterion);
+
+        System.out.println("数据："+pager.toString());
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(pager));
+        System.out.println("发送数据=="+gson.toJson(pager));
     }
 }
