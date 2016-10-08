@@ -76,4 +76,99 @@ public class TestPlanContext implements Serializable {
     @Expose
     private String remark;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCatalogueId() {
+        return catalogueId;
+    }
+
+    public void setCatalogueId(int catalogueId) {
+        this.catalogueId = catalogueId;
+    }
+
+    public String getTestID() {
+        return testID;
+    }
+
+    public void setTestID(String testID) {
+        this.testID = testID;
+    }
+
+    public String getTestContext() {
+        return testContext;
+    }
+
+    public void setTestContext(String testContext) {
+        this.testContext = testContext;
+    }
+
+    public String getTestAim() {
+        return testAim;
+    }
+
+    public void setTestAim(String testAim) {
+        this.testAim = testAim;
+    }
+
+    public String getTestMethod() {
+        return testMethod;
+    }
+
+    public void setTestMethod(String testMethod) {
+        this.testMethod = testMethod;
+    }
+
+    public String getTestTopology() {
+        return testTopology;
+    }
+
+    public void setTestTopology(String testTopology) {
+        this.testTopology = testTopology;
+    }
+
+    public String getTestConfigure() {
+        return testConfigure;
+    }
+
+    public void setTestConfigure(String testConfigure) {
+        this.testConfigure = testConfigure;
+    }
+
+    public String getTestResult() {
+        return testResult;
+    }
+
+    public void setTestResult(String testResult) {
+        this.testResult = testResult;
+    }
+
+    public String getNorthInterface() {
+        return northInterface;
+    }
+
+    public void setNorthInterface(String northInterface) {
+        this.northInterface = northInterface;
+    }
+
+    public String getTestConclusion() {
+        return testConclusion;
+    }
+
+    public void setTestConclusion(String testConclusion) {
+        this.testConclusion = testConclusion;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

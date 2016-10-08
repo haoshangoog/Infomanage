@@ -33,4 +33,50 @@ public class TestPlanCatalogue implements Serializable {
     @Expose
     private int testPlanId;
 
+    public TestPlanCatalogue(String catalogueName, int parentsId, int sequence,int testPlanId) {
+        this.catalogueName = catalogueName;
+        this.parentsId = parentsId;
+        this.sequence = sequence;
+        this.testPlanId = testPlanId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCatalogueName() {
+        return catalogueName;
+    }
+
+    public void setCatalogueName(String catalogueName) {
+        this.catalogueName = catalogueName;
+    }
+
+    public int getParentsId() {
+        return parentsId;
+    }
+
+    public void setParentsId(int parentsId) {
+        this.parentsId = parentsId;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public int getTestPlanId() {
+        return testPlanId;
+    }
+
+    public void setTestPlanId(int testPlanId) {
+        this.testPlanId = testPlanId;
+    }
 }

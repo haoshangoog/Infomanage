@@ -21,4 +21,20 @@ public class TestPlan implements Serializable {
     @Column(name="planname")
     @Expose
     private String planname;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPlanname() {
+        return planname;
+    }
+
+    public void setPlanname(String planname) {
+        this.planname = planname;
+    }
 }
