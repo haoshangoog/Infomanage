@@ -72,3 +72,8 @@ http://localhost:8080/testPlanCatalogue/updateTestPlanCatalogue?catalogueId=3&ca
 http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
 参数      catalogueId：目录的id
 返回值     0103：删除成功
+
+8. selectChildCatalogue  查询子目录
+http://localhost:8080/testPlanCatalogue/selectChildCatalogue?parentsCatalogueId=1&deleteflag=0
+参数      parentsCatalogueId：父级目录的id  deleteflag：是否是删除的目录
+返回值     json 字符串

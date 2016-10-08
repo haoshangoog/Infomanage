@@ -1,5 +1,7 @@
 package com.hand.actions;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hand.commonKey.CommonKey;
 import com.hand.entity.TestPlanCatalogue;
 import com.hand.paging.PagingService;
@@ -7,6 +9,7 @@ import com.hand.service.ITestPlanCatalogueService;
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class TestPlanCatalogueAction extends BaseAction {
 
@@ -123,5 +126,30 @@ public class TestPlanCatalogueAction extends BaseAction {
         }
         System.out.println("删除成功");
         out.print(CommonKey.DELETESUCCESS);
+    }
+
+    // 获取目录的子目录
+    public void selectChildCatalogue() throws Exception{
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        System.out.println("---》selectChildCatalogue 方法");
+        String parentsCatalogueId   = request.getParameter("parentsCatalogueId");
+        String deleteflag   = request.getParameter("deleteflag");
+        String sql ="";
+        if(deleteflag ==null){
+            sql ="SELECT * FROM infomanage.testPlanCatalogue " +
+                    "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag=0" +
+                    " order by sequence";
+        }else {
+            sql ="SELECT * FROM infomanage.testPlanCatalogue " +
+                    "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag="+Integer.parseInt(deleteflag)+
+                    " order by sequence";
+        }
+        System.out.println("selectChildCatalogue SQL 查询语句："+sql);
+        List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(testPlanCatalogueList));
     }
 }
