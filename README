@@ -42,3 +42,13 @@ http://localhost:8080/user/isLogin
 http://localhost:8080/testPlan/createTestPlan?planName=测试方案1
 参数      planName： 测试方案名称
 返回值     0101：创建成功
+
+2. updateTestPlan 修改测试方案
+http://localhost:8080/testPlan/updateTestPlan?planNameId=1&planName=测试方案1.1
+参数      planNameId：测试方案Id  planName： 测试方案名称
+返回值      0105：更新成功
+
+3. deleteTestPlan 删除测试方案
+http://localhost:8080/testPlan/deleteTestPlan?planNameId=1
+参数      planNameId：测试方案Id
+返回值     0103：删除成功
