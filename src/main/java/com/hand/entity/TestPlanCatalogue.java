@@ -33,6 +33,12 @@ public class TestPlanCatalogue implements Serializable {
     @Expose
     private int testPlanId;
 
+    @Column(name="deleteflag")
+    @Expose
+    private Integer deleteFlag = 0; // 删除标志符	  0 代表false 1 代表true-已删除
+
+    public TestPlanCatalogue(){};
+
     public TestPlanCatalogue(String catalogueName, int parentsId, int sequence,int testPlanId) {
         this.catalogueName = catalogueName;
         this.parentsId = parentsId;
@@ -78,5 +84,13 @@ public class TestPlanCatalogue implements Serializable {
 
     public void setTestPlanId(int testPlanId) {
         this.testPlanId = testPlanId;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

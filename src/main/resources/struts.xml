@@ -20,6 +20,9 @@
 	<package name="testPlan" namespace="/testPlan" extends="struts-default">
 		<action name="*"  class="testPlanAction" method="{1}" ></action>
 	</package>
+	<package name="testPlanCatalogue" namespace="/testPlanCatalogue" extends="struts-default">
+		<action name="*"  class="testPlanCatalogueAction" method="{1}" ></action>
+	</package>
 
 
 </struts>

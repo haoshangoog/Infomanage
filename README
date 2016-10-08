@@ -52,3 +52,18 @@ http://localhost:8080/testPlan/updateTestPlan?planNameId=1&planName=测试方案
 http://localhost:8080/testPlan/deleteTestPlan?planNameId=1
 参数      planNameId：测试方案Id
 返回值     0103：删除成功
+
+4. createTestPlanCatalogue 创建子目录
+http://localhost:8080/testPlanCatalogue/createTestPlanCatalogue?catalogueName=目录1&parentsId=1&sequence=1
+参数      catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列
+返回值     0101：创建成功
+
+5. createTestPlanCatalogue 更新子目录
+http://localhost:8080/testPlanCatalogue/updateTestPlanCatalogue?catalogueId=3&catalogueName=目录1&parentsId=2&sequence=2
+参数      catalogueId：目录的id    catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列
+返回值      0105：更新成功
+
+6. deleteTestPlanCatalogue 删除子目录
+http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
+参数      catalogueId：目录的id
+返回值     0103：删除成功
