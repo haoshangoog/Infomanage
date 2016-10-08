@@ -77,3 +77,8 @@ http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
 http://localhost:8080/testPlanCatalogue/selectChildCatalogue?parentsCatalogueId=1&deleteflag=0
 参数      parentsCatalogueId：父级目录的id  deleteflag：是否是删除的目录
 返回值     json 字符串
+
+9. selectFristCatalogue  获取 第一目录
+http://localhost:8080/testPlanCatalogue/selectFristCatalogue?testPlanId=1
+参数      testPlanId：测试方案的ID
+返回值     json 字符串

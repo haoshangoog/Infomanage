@@ -139,15 +139,32 @@ public class TestPlanCatalogueAction extends BaseAction {
         String deleteflag   = request.getParameter("deleteflag");
         String sql ="";
         if(deleteflag ==null){
-            sql ="SELECT * FROM infomanage.testPlanCatalogue " +
+            sql ="SELECT * FROM testPlanCatalogue " +
                     "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag=0" +
                     " order by sequence";
         }else {
-            sql ="SELECT * FROM infomanage.testPlanCatalogue " +
+            sql ="SELECT * FROM testPlanCatalogue " +
                     "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag="+Integer.parseInt(deleteflag)+
                     " order by sequence";
         }
         System.out.println("selectChildCatalogue SQL 查询语句："+sql);
+        List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(testPlanCatalogueList));
+    }
+
+    // 获取 第一目录
+    public void selectFristCatalogue() throws Exception{
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        System.out.println("---》selectFristCatalogue 方法");
+        String testPlanId   = request.getParameter("testPlanId");
+        String sql ="";
+            sql ="SELECT * FROM testPlanCatalogue " +
+                    "where parentsId=0 and sequence=0 and testPlanId="+Integer.parseInt(testPlanId);
+        System.out.println("selectFristCatalogue SQL 查询语句："+sql);
         List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson(testPlanCatalogueList));
