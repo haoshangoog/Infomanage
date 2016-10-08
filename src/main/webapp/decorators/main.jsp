@@ -46,25 +46,7 @@
 <body>
 	<jsp:include page="/jsp/view/layout/nav_top.jsp"></jsp:include>
 	<div class="container-fluid">
-		<div class="row">
-			<div id="mainLeftPanel" class="col-md-2">
-				<jsp:include page="/jsp/view/layout/left_panel_user.jsp"></jsp:include>
-			</div>
 			<sitemesh:write property='body'/>
-		</div>
-	</div>
-	
-	<script type="text/javascript">
-		var url_perfix = "http://localhost:8080/";
-		if(window.location.href==url_perfix){
-			$('#mainLeftPanel').remove()
-		}
-		if(window.location.href==(url_perfix+"#")){
-			$('#mainLeftPanel').remove()
-		}		
-		if(window.location.href==url_perfix+"Home/Index"){
-			$('#mainLeftPanel').remove()
-		}
-	</script>
+    </div>
 </body>
 </html>
