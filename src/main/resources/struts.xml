@@ -26,6 +26,8 @@
 	<package name="testPlanContext" namespace="/testPlanContext" extends="struts-default">
 		<action name="*"  class="testPlanContextAction" method="{1}" ></action>
 	</package>
-
+	<package name="FAQ" namespace="/FAQ" extends="struts-default">
+		<action name="*"  class="fAQAction" method="{1}" ></action>
+	</package>
 
 </struts>

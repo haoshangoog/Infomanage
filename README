@@ -109,3 +109,27 @@ http://localhost:8080/testPlanContext/deleteTestPlanContext?testPlanContextId=1
 http://localhost:8080/testPlanContext/selectContextByCatalogueId?catalogueId=1
 参数       catalogueId： 测试方案目录id
 返回值     json 字符串
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////    FAQ     ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1.  createFAQ   创建 FAQ
+http://localhost:8080/FAQ/createFAQ?question=question&answer=answer
+参数       question：问题    answer：答案
+返回值     0101：创建成功
+
+2.  updateFAQ   更新 FAQ
+http://localhost:8080/FAQ/updateFAQ?faqId=1&question=question0&answer=answer0
+参数       faqId：FAQ的id    question：问题    answer：答案
+返回值      0105：更新成功
+
+3. deleteFAQ    删除 FAQ
+http://localhost:8080/FAQ/deleteFAQ?faqId=1
+参数      faqId：FAQ的id
+返回值     0103：删除成功
+
+4.pageingFAQ    FAQ 分页
+http://localhost:8080/FAQ/pageingFAQ?pageNo=1&pageSize=5&deleteflag=0
+参数      pageNo：当前页      pageSize：每页的条数      deleteflag：选择删除的测试方案还是未删除的（不写代表是没有删除的）
+返回值    json 字符串

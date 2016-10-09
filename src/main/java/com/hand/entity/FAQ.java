@@ -20,13 +20,17 @@ public class FAQ implements Serializable {
     @Expose
     private int id;
 
-    @Column(name="question")
+    @Column(name="question",columnDefinition="TEXT")
     @Expose
     private String question;
 
-    @Column(name="answer")
+    @Column(name="answer",columnDefinition="TEXT")
     @Expose
     private String answer;
+
+    @Column(name="deleteflag")
+    @Expose
+    private Integer deleteFlag = 0; // 删除标志符	  0 代表false 1 代表true-已删除
 
     public int getId() {
         return id;
@@ -50,5 +54,13 @@ public class FAQ implements Serializable {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }
