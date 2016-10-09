@@ -56,5 +56,7 @@
 	<bean id="userAction" class="com.hand.actions.UserAction"></bean>
 	<bean id="testPlanAction" class="com.hand.actions.TestPlanAction"></bean>
 	<bean id="testPlanCatalogueAction" class="com.hand.actions.TestPlanCatalogueAction"></bean>
+	<bean id="testPlanContextAction" class="com.hand.actions.TestPlanContextAction"></bean>
+
 
 </beans>
