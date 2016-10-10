@@ -18,7 +18,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse">
             <ul id="topMenuList" class="nav navbar-nav">
-                <li><a href="">测试方案</a></li>
+                <li><a href="<%=request.getContextPath()%>jsp/view/testplan/testplanList.jsp">测试方案</a></li>
                 <li><a href="">FAQ</a></li>
                 <li><a href="">视频教学</a></li>
                 <li><a href="">文档资料</a></li>
