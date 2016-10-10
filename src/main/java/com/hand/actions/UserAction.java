@@ -147,7 +147,7 @@ public class UserAction extends BaseAction {
     public void pageingUser() throws Exception {
         System.out.print("---》pageingUser 方法");
         // user 信息 的分页查询
-        int pageNo = Integer.parseInt(request.getParameter("PageNo"));
+        int pageNo = Integer.parseInt(request.getParameter("pageNo"));
         String identity = request.getParameter("identity");
         Criterion criterion = null;
         if(identity!=null)criterion =  Restrictions.eq("identity",Integer.parseInt(identity));
