@@ -21,7 +21,7 @@ function paging(InsertID, ModelId, ActionName,PageNo,isPaging) {
     var json = null;
     $.ajax({
         type: "post",
-        data: {"PageNo":PageNo},
+        data: {"pageNo":PageNo},
         url: ActionName,
         async: false,
         dataType: 'json',
