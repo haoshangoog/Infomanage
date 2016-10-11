@@ -30,10 +30,10 @@
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/ie-emulation-modes-warning.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/masonry.pkgd.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/modernizr-2.6.2.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/textedit.js"></script>
-	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/wysiwyg-editor.js"></script>
+	<%--<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/textedit.js"></script>--%>
+	<%--<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/wysiwyg-editor.js"></script>--%>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/Chart.js"></script>
-	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/wysiwyg.js"></script>
+	<%--<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/wysiwyg.js"></script>--%>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/app.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/paging.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/menuActive.js"></script>

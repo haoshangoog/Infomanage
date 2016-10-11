@@ -28,16 +28,18 @@ $.ajax({
         console.log(msg.length);
         if(msg.length != 0){
             for(var i = 0 ; i < msg.length ; i++){
-                $("#catalogue").append("<li><a href='javascript:void(0)' value='" + msg[i].id + "' class='inactive'>"+msg[i].catalogueName+"</a></li>")
+                $("#catalogue").append("<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + msg[i].id + "' class='inactive'>"+msg[i].catalogueName+"</a></li>")
             }
         }
     }
 });
 //////////////    以上是初始化 ///////////////////////////////////
 
-$('.inactive').click(function(){
-    parentsId = $(this).attr("value");
-    var thisNode = this;
+function showChild(obj){
+    parentsId = $(obj).attr("value");
+    console.log(" obj --------")
+    console.log(obj);
+    var thisNode = $(obj);
     var head = "<ul  style='display: none'>";
     var end  = "</ul>";
     var middel = "";
@@ -55,7 +57,7 @@ $('.inactive').click(function(){
             console.log(msg.length);
             if(msg.length != 0){
                 for(var i = 0 ; i < msg.length ; i++){
-                    middel += "<li><a href='javascript:void(0)' value='" + msg[i].id + "' class='inactive'>"+msg[i].catalogueName+"</a></li>";
+                    middel += "<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + msg[i].id + "' class='inactive'>"+msg[i].catalogueName+"</a></li>";
                 }
             }
             console.log($(thisNode))
@@ -65,24 +67,26 @@ $('.inactive').click(function(){
 
 
 
-    if($(this).siblings('ul').css('display')=='none'){
-        $(this).parent('li').siblings('li').removeClass('inactives');
-        $(this).addClass('inactives');
-        $(this).siblings('ul').slideDown(100).children('li');
-        if($(this).parents('li').siblings('li').children('ul').css('display')=='block'){
-            $(this).parents('li').siblings('li').children('ul').parent('li').children('a').removeClass('inactives');
-            $(this).parents('li').siblings('li').children('ul').slideUp(100);
+    if($(obj).siblings('ul').css('display')=='none'){
+        $(obj).parent('li').siblings('li').removeClass('inactives');
+        $(obj).addClass('inactives');
+        $(obj).siblings('ul').slideDown(100).children('li');
+        if($(obj).parents('li').siblings('li').children('ul').css('display')=='block'){
+            $(obj).parents('li').siblings('li').children('ul').parent('li').children('a').removeClass('inactives');
+            $(obj).parents('li').siblings('li').children('ul').slideUp(100);
         }
     }else{
         //控制自身变成+号
-        $(this).removeClass('inactives');
+        $(obj).removeClass('inactives');
         //控制自身菜单下子菜单隐藏
-        $(this).siblings('ul').slideUp(100);
+        $(obj).siblings('ul').slideUp(100);
         //控制自身子菜单变成+号
-        $(this).siblings('ul').children('li').children('ul').parent('li').children('a').addClass('inactives');
+        $(obj).siblings('ul').children('li').children('ul').parent('li').children('a').addClass('inactives');
         //控制自身菜单下子菜单隐藏
-        $(this).siblings('ul').children('li').children('ul').slideUp(100);
+        $(obj).siblings('ul').children('li').children('ul').slideUp(100);
+        // 移除 子菜单
+        $(obj).siblings('ul').children('li').remove();
         //控制同级菜单只保持一个是展开的（-号显示）
-        $(this).siblings('ul').children('li').children('a').removeClass('inactives');
+        $(obj).siblings('ul').children('li').children('a').removeClass('inactives');
     }
-});
+};

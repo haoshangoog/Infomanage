@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2" id="id1">
         <div class="list">
             <ul class="yiji" id="catalogue">
                 <li><a href="javascript:" class="inactive">团体会员</a>
