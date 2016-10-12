@@ -1,4 +1,7 @@
 var FRISTCATALOGUEID = null;
+
+var EDITFlAG = $("#editFlag").is(':checked');
+
 $.ajax({
     type: "post",
     data: {"testPlanId":1},

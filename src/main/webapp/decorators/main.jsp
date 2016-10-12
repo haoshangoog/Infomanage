@@ -11,6 +11,7 @@
 <base href="<%=basePath%>">
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/bootstrap-switch.min.css">
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/bootstrap-datetimepicker.css">
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/cssFramework/offcanvas.css">
@@ -22,6 +23,7 @@
 	<link rel="stylesheet" type="text/css"  href="<%=basePath%>jsp/css/table.css">
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/jquery.validate.js"></script>
+    <script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/bootstrap-switch.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/additional-methods.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/JsFramework/moment-with-locales.js"></script>

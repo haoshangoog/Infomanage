@@ -32,23 +32,13 @@
 <body>
 <div class="row">
     <div class="col-md-2" id="id1">
+        <div class="switch">
+            <label>编辑目录：</label>
+            <input id="editFlag" type="checkbox"/>
+        </div>
         <div class="list">
             <ul class="yiji" id="catalogue">
-                <li><a href="javascript:" class="inactive">团体会员</a>
-                    <ul style="display: none">
-                        <li><a href="javascript:" class="inactive active">美协机关</a>
-                            <ul>
-                                <li><a href="#">办公室</a></li>
-                                <li><a href="#">人事处</a></li>
-                                <li><a href="#">组联部</a></li>
-                                <li><a href="#">外联部</a></li>
-                                <li><a href="#">研究部</a></li>
-                                <li><a href="#">维权办</a></li>
-                            </ul>
-                        </li>
-                        <li class="last"><a href="#">《美术》杂志社</a></li>
-                    </ul>
-                </li>
+
             </ul>
         </div>
     </div>
