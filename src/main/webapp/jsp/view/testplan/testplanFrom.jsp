@@ -259,6 +259,9 @@
             </div>
         </div>
     </div>
+    <div class="col-md-1">
+        <button type="button" class="btn btn-default" style="float: right" onclick="deleteTestPlan()">删除此测试方案</button>
+    </div>
 </div>
 
 <!-- START 编辑目录的页面model -->
@@ -349,5 +352,28 @@
 
 
 <script type="text/javascript" src="jsp/js/treeCatalogue.js"></script>
+<script type="text/javascript">
+    function deleteTestPlan() {
+        alert("您确定要删除此测试方案吗？");
+        $.ajax({
+            type: "post",
+            data: {"planNameId":localStorage['testPlanId']},
+            url: "http://localhost:8080/testPlan/deleteTestPlan",
+            async: false,
+            dataType: 'html',
+            error : function() {
+                alert("createTestPlan 错误");
+            },
+            success: function (msg) {
+                if(msg == "0103"){
+                    alert("删除成功");
+                    window.location.href="http://localhost:8080/jsp/view/testplan/testplanList.jsp";
+                }else {
+                    alert("删除失败")
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
