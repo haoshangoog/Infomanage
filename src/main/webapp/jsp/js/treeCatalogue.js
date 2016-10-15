@@ -40,6 +40,7 @@ function onClickEdit() {
     var root = "<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + FRISTCATALOGUEID + "' class='inactive'>根目录</a></li>"
     $('#catalogue').remove();
     if($("#editFlag").is(':checked')){
+        $('#editCatalogueModel').removeAttr("hidden");
         $('#rootCatalogue').children().remove();
         $('#rootCatalogue').append(root);
     }else {
@@ -85,6 +86,7 @@ function showChild(obj){
                 ShowEditCatalogue(parentsId,parentsName, msg);
             }else {
                 console.log("应该显示 【编辑内容】  页面");
+                ShowEditContextPage(parentsId,parentsName);
             }
 
         }
@@ -147,9 +149,39 @@ function ShowEditCatalogue(parentsId, parentsName , childrenCatalogue) {
 }
 
 // 显示 内容页 页面
-function ShowEditContextPage(parentsId) {
-
+function ShowEditContextPage(catalogueID,catalogueName) {
     console.log("显示 内容页 页面  ==> ShowEditContextPage");
+    $("#rootCatagolueNameStr_Context").text("目录： " + catalogueName );
+    $("#rootCatagolueName_Context").text( catalogueName );
+    $("#rootCatagolueId_Context").text( catalogueID );
+    $.ajax({
+        type: "post",
+        data: {"catalogueId":catalogueID},
+        url: "http://localhost:8080/testPlanContext/selectContextByCatalogueId",
+        async: false,
+        dataType: 'json',
+        error : function() {
+            alert("ShowEditContextPage 方法 出错");
+        },
+        success: function (msg) {
+            if(msg == null){
+                alert("没有更多内容了");
+                return;
+            }
+            var context = msg[0];
+            $("#testPK").html(context.id);
+            $("#testID").html(context.testID);
+            $("#testContext").html(context.testContext);
+            $("#testAim").html(context.testAim);
+            $("#testTopology").html(context.testTopology);
+            $("#testMethod").html(context.testMethod);
+            $("#testConfigure").html(context.testConfigure);
+            $("#testResult").html(context.testResult);
+            $("#northInterface").html(context.northInterface);
+            $("#testConclusion").html(context.testConclusion);
+            $("#remark").html(context.remark);
+        }
+    });
 
 }
 
@@ -226,7 +258,7 @@ function deleteCommit() {
 }
 
 // 显示 添加目录 的模态框
-function addButton() {
+function addCatalogueButton() {
     console.log("------ addButton 方法");
     $('#addModal').modal('show');
     $('#addModalLabel').text( "添加到： " + $("#rootCatagolueName").text()) ;
@@ -257,4 +289,9 @@ function addCommit() {
     });
     // 关闭 模态框
     $('#addModal').modal('hide');
+}
+
+// 编辑 内容页
+function editContextButton() {
+    
 }

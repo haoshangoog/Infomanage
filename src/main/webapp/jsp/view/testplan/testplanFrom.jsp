@@ -104,7 +104,7 @@
     <div class="col-md-9">
         <div class="panel panel-default" style="height:auto!important; height:100%; min-height: 500px;">
             <div class="panel-body">
-                <div id="editCatalogueModel" style="padding: 0% 5%">
+                <div id="editCatalogueModel" style="padding: 0% 5%" hidden="hidden">
                     <div class="row">
                         <label><h3 id="rootCatagolueNameStr">请选择目录</h3></label>
                         <label hidden="hidden"><h3 id="rootCatagolueName"></h3></label>
@@ -113,7 +113,9 @@
                     </div>
                     <div class="row">
                         <label><h4>子目录：</h4></label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="addButton()" style="float: right">添加子目录</button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="addCatalogueButton()" style="float: right">
+                            添加子目录
+                        </button>
                     </div>
                     <div class="row">
                         <table class="table table-hover">
@@ -128,6 +130,71 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div id="showConext" style="padding: 0% 5%">
+                    <div class="row">
+                        <label><h3 id="rootCatagolueNameStr_Context">请选择目录</h3></label>
+                        <label hidden="hidden"><h3 id="rootCatagolueName_Context"></h3></label>
+                        <label hidden="hidden"><h4 id="rootCatagolueId_Context"></h4></label>
+                        <button type="button" class="btn btn-default btn-sm" onclick="editContextButton()" style="float: right">
+                            修改此内容
+                        </button>
+                        <hr style="margin-top:0px ; width: 100% ;border-top-color: black">
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="20%">名称</th>
+                            <th>内容</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr hidden="hidden">
+                            <td>ID</td>
+                            <td id="testPK"></td>
+                        </tr>
+                        <tr>
+                            <td>测试ID&nbsp&nbsp&nbsp：</td>
+                            <td id="testID"></td>
+                        </tr>
+                        <tr>
+                            <td>测试内容：</td>
+                            <td id="testContext"></td>
+                        </tr>
+                        <tr>
+                            <td>测试目的：</td>
+                            <td id="testAim"></td>
+                        </tr>
+                        <tr>
+                            <td>测试拓扑：</td>
+                            <td id="testTopology"></td>
+                        </tr>
+                        <tr>
+                            <td>测试方法：</td>
+                            <td id="testMethod"></td>
+                        </tr>
+                        <tr>
+                            <td>测试配置：</td>
+                            <td id="testConfigure"></td>
+                        </tr>
+                        <tr>
+                            <td>测试结果：</td>
+                            <td id="testResult"></td>
+                        </tr>
+                        <tr>
+                            <td>北向接口：</td>
+                            <td id="northInterface"></td>
+                        </tr>
+                        <tr>
+                            <td>测试结论：</td>
+                            <td id="testConclusion"></td>
+                        </tr>
+                        <tr>
+                            <td>备注：</td>
+                            <td id="remark"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -144,7 +211,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="editModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
@@ -173,7 +241,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="addModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
@@ -194,11 +263,13 @@
     </div>
 </div>
 <!-- delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="deleteModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
