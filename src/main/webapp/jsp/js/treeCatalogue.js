@@ -127,7 +127,7 @@ function ShowEditCatalogue(parentsName , childrenCatalogue) {
             '<td>' +
             '<button type="button" class="btn btn-default btn-sm"' +
                     'onclick="editButton(' + catalogue.id +',\'' + catalogue.catalogueName + "'," + catalogue.sequence + ')">编辑</button>' +
-            '<button type="button" class="btn btn-default btn-sm" onclick="deleteButton(' + catalogue.id + ')">删除</button>' +
+            '<button type="button" class="btn btn-default btn-sm" onclick="deleteButton(' + catalogue.id + ',\'' + catalogue.catalogueName + '\')">删除</button>' +
             '</td>' +
             '</tr>' ;
         $("#childrenCatalogueList").append(child);
@@ -147,7 +147,6 @@ function ShowEditContextPage(parentsId) {
 // 显示 编辑目录页面的 模态框
 function editButton(catalogueID, catalogueName, sequence) {
     console.log("------ editButton 方法");
-    console.log(catalogue)
     if(catalogue){
         // 1 .  显示模态框
         $('#editModal').modal('show');
@@ -183,8 +182,38 @@ function editCommit() {
             }
         }
     });
-
+    // 关闭 模态框
     $('#editModal').modal('hide');
+}
 
-
+// 显示 删除目录 模态框
+function deleteButton(catalogueID,catalogueName) {
+    console.log("------ deleteButton 方法");
+    $('#deleteModalLabel').text( "删除： " + catalogueName ) ;
+    $('#deleteCatalogueID').val(catalogueID);
+    $('#deleteModal').modal('show');
+}
+// 提交删除信息
+function deleteCommit() {
+    console.log("------ deleteCommit 方法");
+    var catalogueID = $('#deleteCatalogueID').val();
+    $.ajax({
+        type: "post",
+        data: {"catalogueId":catalogueID},
+        url: "http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue",
+        async: false,
+        dataType: 'html',
+        error : function() {
+            alert("deleteCommit 方法 出错");
+        },
+        success: function (msg) {
+            if(msg == "0103"){
+                alert("删除成功");
+            }else {
+                alert("删除失败");
+            }
+        }
+    });
+    // 关闭 模态框
+    $('#deleteModal').modal('hide');
 }

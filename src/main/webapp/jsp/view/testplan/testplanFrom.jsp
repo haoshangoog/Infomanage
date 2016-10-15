@@ -170,7 +170,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="editCommit()">保存</button>
+                <button type="button" class="btn btn-primary" onclick="editCommit()">更新此条记录</button>
             </div>
         </div>
     </div>
@@ -202,11 +202,15 @@
                 <h4 class="modal-title" id="deleteModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                ...
+                <h4 id="deleteCatalogueWarnInfo">您确定要删除此条记录吗？</h4>
+                <div class="form-group" hidden="hidden">
+                    <label for="editCatalogueID">目录ID：</label>
+                    <input type="text" class="form-control" id="deleteCatalogueID" disabled>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="deleteCommit()">删除此条记录</button>
             </div>
         </div>
     </div>
@@ -218,11 +222,6 @@
 
 <script type="text/javascript" src="jsp/js/treeCatalogue.js"></script>
 <script type="text/javascript">
-
-    function deleteButton() {
-        console.log("------ deleteButton 方法");
-        $('#deleteModal').modal('show');
-    }
     function addButton() {
         console.log("------ addButton 方法");
         $('#addModal').modal('show');
