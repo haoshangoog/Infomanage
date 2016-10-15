@@ -1,9 +1,14 @@
 var FRISTCATALOGUEID = null;
+var TESTPLANID  = localStorage['testPlanId'];
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 这个地方需要校验 是否是数字！！！！！！！！
+if(TESTPLANID ==null || TESTPLANID == ""){
+    alert("系统出错！")
+}
 $("#editCommitContextButton").hide();
 $("#addCommitContextButton").hide();
 $.ajax({
     type: "post",
-    data: {"testPlanId":1},
+    data: {"testPlanId":TESTPLANID},
     url: "http://localhost:8080/testPlanCatalogue/selectFristCatalogue",
     async: false,
     dataType: 'json',
