@@ -94,12 +94,11 @@
     <div class="col-md-2" id="id1">
         <div class="switch">
             <label>编辑目录：</label>
-            <input id="editFlag" type="checkbox"/>
+            <input id="editFlag" type="checkbox" onclick="onClickEdit()"/>
         </div>
         <div class="list">
-            <ul class="yiji" id="catalogue">
-
-            </ul>
+            <ul id="rootCatalogue"></ul>
+            <ul class="yiji" id="catalogue"></ul>
         </div>
     </div>
     <div class="col-md-9">
@@ -107,7 +106,7 @@
             <div class="panel-body">
                 <div id="editCatalogueModel" style="padding: 0% 5%">
                     <div class="row">
-                        <label><h3 id="rootCatagolueNameStr">根目录：根目录名称</h3></label>
+                        <label><h3 id="rootCatagolueNameStr">请选择目录</h3></label>
                         <label hidden="hidden"><h3 id="rootCatagolueName"></h3></label>
                         <label hidden="hidden"><h3 id="rootCatagolueId"></h3></label>
                         <hr style="margin-top:0px ; width: 100% ;border-top-color: black">
@@ -126,14 +125,6 @@
                             </tr>
                             </thead>
                             <tbody id="childrenCatalogueList">
-                            <tr>
-                                <td>1</td>
-                                <td>名称1</td>
-                                <td>
-                                    <button type="button" class="btn btn-default btn-sm" onclick="editButton()">编辑</button>
-                                    <button type="button" class="btn btn-default btn-sm" onclick="deleteButton()">删除</button>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>

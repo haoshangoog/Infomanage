@@ -1,7 +1,5 @@
 var FRISTCATALOGUEID = null;
 
-// var EDITFlAG = $("#editFlag").is(':checked');
-
 $.ajax({
     type: "post",
     data: {"testPlanId":1},
@@ -36,6 +34,18 @@ $.ajax({
         }
     }
 });
+
+function onClickEdit() {
+    console.log("点击编辑目录");
+    var root = "<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + FRISTCATALOGUEID + "' class='inactive'>根目录</a></li>"
+    $('#catalogue').remove();
+    if($("#editFlag").is(':checked')){
+        $('#rootCatalogue').children().remove();
+        $('#rootCatalogue').append(root);
+    }else {
+        window.location.reload();
+    }
+}
 //////////////    以上是初始化 ///////////////////////////////////
 
 function showChild(obj){
@@ -146,16 +156,14 @@ function ShowEditContextPage(parentsId) {
 // 显示 编辑目录页面的 模态框
 function editButton(catalogueID, catalogueName, sequence) {
     console.log("------ editButton 方法");
-    if(catalogue){
-        // 1 .  显示模态框
-        $('#editModal').modal('show');
-        // 2 . 模态框 头的显示
-        $('#editModalLabel').text( "编辑： " + catalogueName ) ;
-        // 3 . 添加默认的 值
-        $('#editCatalogueName').val( catalogueName ) ;
-        $('#editSequence').val( sequence ) ;
-        $('#editCatalogueID').val(catalogueID)
-    }
+    // 1 .  显示模态框
+    $('#editModal').modal('show');
+    // 2 . 模态框 头的显示
+    $('#editModalLabel').text( "编辑： " + catalogueName ) ;
+    // 3 . 添加默认的 值
+    $('#editCatalogueName').val( catalogueName ) ;
+    $('#editSequence').val( sequence ) ;
+    $('#editCatalogueID').val(catalogueID) ;
 }
 // 提交更改信息
 function editCommit() {
