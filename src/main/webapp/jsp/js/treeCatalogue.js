@@ -1,5 +1,6 @@
 var FRISTCATALOGUEID = null;
-
+$("#editCommitContextButton").hide();
+$("#addCommitContextButton").hide();
 $.ajax({
     type: "post",
     data: {"testPlanId":1},
@@ -32,11 +33,15 @@ $.ajax({
                 $("#catalogue").append("<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + msg[i].id + "' class='inactive'>"+msg[i].catalogueName+"</a></li>")
             }
         }
+        $("#editContextButton").hide();
+        $("#addContextButton").hide();
     }
 });
 
 function onClickEdit() {
     console.log("点击编辑目录");
+    $("#editContextInfo").removeAttr("hidden");
+    $("#showConext").attr("hidden","hidden");
     var root = "<li><a href='javascript:void(0)' onclick='showChild(this)' value='" + FRISTCATALOGUEID + "' class='inactive'>根目录</a></li>"
     $('#catalogue').remove();
     if($("#editFlag").is(':checked')){
@@ -148,38 +153,69 @@ function ShowEditCatalogue(parentsId, parentsName , childrenCatalogue) {
     });
 }
 
-// 显示 内容页 页面
+// 显示 内容【页】 页面
 function ShowEditContextPage(catalogueID,catalogueName) {
     console.log("显示 内容页 页面  ==> ShowEditContextPage");
     $("#rootCatagolueNameStr_Context").text("目录： " + catalogueName );
     $("#rootCatagolueName_Context").text( catalogueName );
     $("#rootCatagolueId_Context").text( catalogueID );
+
+    $("#showContextInfo").attr("hidden","hidden");
+    $("#editContextInfo").attr("hidden","hidden");
+    $("#editContextButton").hide();
+    $("#addContextButton").hide();
+    $("#contextMsg").children().remove();
+
     $.ajax({
         type: "post",
         data: {"catalogueId":catalogueID},
         url: "http://localhost:8080/testPlanContext/selectContextByCatalogueId",
         async: false,
         dataType: 'json',
-        error : function() {
-            alert("ShowEditContextPage 方法 出错");
-        },
+
         success: function (msg) {
-            if(msg == null){
-                alert("没有更多内容了");
+            if(msg == "2001"){
+                $("#contextMsg").append("<h4> 没有内容呀！ 赶快创建一条吧。。。 </h4>");
+                $("#addContextButton").show();
                 return;
             }
             var context = msg[0];
             $("#testPK").html(context.id);
+            $("#testPK_edit").html(context.id);
+
             $("#testID").html(context.testID);
+            $("#testID_edit").html(context.testID);
+
             $("#testContext").html(context.testContext);
+            $("#testContext_edit").html(context.testContext);
+
             $("#testAim").html(context.testAim);
+            $("#testAim_edit").html(context.testAim);
+
             $("#testTopology").html(context.testTopology);
+            $("#testTopology_edit").html(context.testTopology);
+
             $("#testMethod").html(context.testMethod);
+            $("#testMethod_edit").html(context.testMethod);
+
             $("#testConfigure").html(context.testConfigure);
+            $("#testConfigure_edit").html(context.testConfigure);
+
             $("#testResult").html(context.testResult);
+            $("#testResult_edit").html(context.testResult);
+
             $("#northInterface").html(context.northInterface);
+            $("#northInterface_edit").html(context.northInterface);
+
             $("#testConclusion").html(context.testConclusion);
+            $("#testConclusion_edit").html(context.testConclusion);
+
             $("#remark").html(context.remark);
+            $("#remark_edit").html(context.remark);
+
+            $("#showContextInfo").removeAttr("hidden");
+            $("#editContextInfo").attr("hidden","hidden");
+            $("#editContextButton").show();
         }
     });
 
@@ -293,5 +329,168 @@ function addCommit() {
 
 // 编辑 内容页
 function editContextButton() {
-    
+    console.log("------ editContextButton 方法");
+    $("#editContextInfo").removeAttr("hidden");
+    $("#showContextInfo").attr("hidden","hidden");
+    $("#editContextButton").hide();
+    $("#addContextButton").hide();
+    $("#editCommitContextButton").show();
+}
+
+// 提交 内容页
+function editCommitContextButton(){
+    console.log("------ editCommitContextButton 方法");
+
+    var testPK =  $("#testPK_edit").val();
+    $("#testPK").html(testPK);
+
+    var testID = $("#testID_edit").val();
+    $("#testID").html(testID);
+
+    var testContext = $("#testContext_edit").val();
+    $("#testContext").html(testContext);
+
+    var testAim = $("#testAim_edit").val();
+    $("#testAim").html(testAim);
+
+    var testTopology = $("#testTopology_edit").val();
+    $("#testTopology").html(testTopology);
+
+    var testMethod = $("#testMethod_edit").val();
+    $("#testMethod").html(testMethod);
+
+    var testConfigure = $("#testConfigure_edit").val();
+    $("#testConfigure").html(testConfigure);
+
+    var testResult = $("#testResult_edit").val();
+    $("#testResult").html(testResult);
+
+    var northInterface = $("#northInterface_edit").val();
+    $("#northInterface").html(northInterface);
+
+    var testConclusion = $("#testConclusion_edit").val();
+    $("#testConclusion").html(testConclusion);
+
+    var remark = $("#remark_edit").val();
+    $("#remark").html(remark);
+
+    $.ajax({
+        type: "post",
+        data: {
+            "testPlanContextId":testPK,
+            "testID":testID,
+            "testContext":testContext,
+            "testAim":testAim,
+            "testTopology":testTopology,
+            "testMethod":testMethod,
+            "testConfigure":testConfigure,
+            "testResult":testResult,
+            "northInterface":northInterface,
+            "testConclusion":testConclusion,
+            "remark":remark,
+        },
+        url: "http://localhost:8080/testPlanContext/updateTestPlanContext",
+        async: false,
+        dataType: 'html',
+        error : function() {
+            alert("editCommitContextButton 方法 出错");
+        },
+        success: function (msg) {
+            if(msg == "0105"){
+                alert("更新成功");
+                $("#showContextInfo").removeAttr("hidden");
+                $("#editContextInfo").attr("hidden","hidden");
+                $("#editContextButton").show();
+                $("#addContextButton").hide();
+                $("#editCommitContextButton").hide();
+            }else {
+                alert("更新失败");
+            }
+        }
+    });
+
+}
+
+function addContextButton() {
+    console.log("------ addContextButton 方法");
+
+    $("#editContextInfo").removeAttr("hidden");
+    $("#showContextInfo").attr("hidden","hidden");
+    $("#editContextButton").hide();
+    $("#addContextButton").hide();
+    $("#editCommitContextButton").hide();
+    $("#addCommitContextButton").show();
+
+}
+
+function addCommitContextButton() {
+    console.log("------ addCommitContextButton 方法");
+
+    var catalogueId = $("#rootCatagolueId_Context").text();
+
+    var testID = $("#testID_edit").val();
+    $("#testID").html(testID);
+
+    var testContext = $("#testContext_edit").val();
+    $("#testContext").html(testContext);
+
+    var testAim = $("#testAim_edit").val();
+    $("#testAim").html(testAim);
+
+    var testTopology = $("#testTopology_edit").val();
+    $("#testTopology").html(testTopology);
+
+    var testMethod = $("#testMethod_edit").val();
+    $("#testMethod").html(testMethod);
+
+    var testConfigure = $("#testConfigure_edit").val();
+    $("#testConfigure").html(testConfigure);
+
+    var testResult = $("#testResult_edit").val();
+    $("#testResult").html(testResult);
+
+    var northInterface = $("#northInterface_edit").val();
+    $("#northInterface").html(northInterface);
+
+    var testConclusion = $("#testConclusion_edit").val();
+    $("#testConclusion").html(testConclusion);
+
+    var remark = $("#remark_edit").val();
+    $("#remark").html(remark);
+
+    $.ajax({
+        type: "post",
+        data: {
+            "catalogueId":catalogueId,
+            "testID":testID,
+            "testContext":testContext,
+            "testAim":testAim,
+            "testTopology":testTopology,
+            "testMethod":testMethod,
+            "testConfigure":testConfigure,
+            "testResult":testResult,
+            "northInterface":northInterface,
+            "testConclusion":testConclusion,
+            "remark":remark,
+        },
+        url: "http://localhost:8080/testPlanContext/createTestPlanContext",
+        async: false,
+        dataType: 'html',
+        error : function() {
+            alert("addCommitContextButton 方法 出错");
+        },
+        success: function (msg) {
+            if(msg == "0101"){
+                alert("创建成功");
+                $("#showContextInfo").removeAttr("hidden");
+                $("#editContextInfo").attr("hidden","hidden");
+                $("#editContextButton").hide();
+                $("#addContextButton").hide();
+                $("#editCommitContextButton").hide();
+                $("#addCommitContextButton").hide();
+            }else {
+                alert("创建失败");
+            }
+        }
+    });
 }

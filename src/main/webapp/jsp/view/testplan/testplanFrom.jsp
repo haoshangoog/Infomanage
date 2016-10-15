@@ -136,12 +136,71 @@
                         <label><h3 id="rootCatagolueNameStr_Context">请选择目录</h3></label>
                         <label hidden="hidden"><h3 id="rootCatagolueName_Context"></h3></label>
                         <label hidden="hidden"><h4 id="rootCatagolueId_Context"></h4></label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="editContextButton()" style="float: right">
+                        <button id="editContextButton"type="button" class="btn btn-default btn-sm" onclick="editContextButton()" style="float: right" >
                             修改此内容
+                        </button>
+                        <button id="editCommitContextButton"type="button" class="btn btn-default btn-sm" onclick="editCommitContextButton()" style="float: right" >
+                            提交修改内容
+                        </button>
+                        <button id="addContextButton" type="button" class="btn btn-default btn-sm" onclick="addContextButton()" style="float: right" >
+                            创建内容
+                        </button>
+                        <button id="addCommitContextButton"type="button" class="btn btn-default btn-sm" onclick="addCommitContextButton()" style="float: right" >
+                            提交创建改内容
                         </button>
                         <hr style="margin-top:0px ; width: 100% ;border-top-color: black">
                     </div>
-                    <table class="table table-hover">
+                    <div id="contextMsg"></div>
+                    <!-- START 编辑 页 信息的model -->
+                    <div id="editContextInfo" hidden="hidden">
+                        <div class="form-group" hidden="hidden">
+                            <label>ID</label>
+                            <textarea class="form-control" id="testPK_edit" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试：</label>
+                            <textarea class="form-control" id="testID_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试内容：</label>
+                            <textarea class="form-control" id="testContext_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试目的：</label>
+                            <textarea class="form-control" id="testAim_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试拓扑：</label>
+                            <textarea class="form-control" id="testTopology_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试方法：</label>
+                            <textarea class="form-control" id="testMethod_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试配置：</label>
+                            <textarea class="form-control" id="testConfigure_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试结果：</label>
+                            <textarea class="form-control" id="testResult_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>北向接口：</label>
+                            <textarea class="form-control" id="northInterface_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>测试结论：</label>
+                            <textarea class="form-control" id="testConclusion_edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>备注：</label>
+                            <textarea class="form-control" id="remark_edit"></textarea>
+                        </div>
+                    </div>
+                    <!-- END   编辑 页 信息的model -->
+                    <!-- START 显示 页 信息的model -->
+                    <table class="table table-hover" id="showContextInfo" hidden="hidden">
                         <thead>
                         <tr>
                             <th width="20%">名称</th>
@@ -195,6 +254,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <!-- END 显示 页 信息的model -->
                 </div>
             </div>
         </div>
@@ -287,9 +347,6 @@
     </div>
 </div>
 
-<!-- START 编辑 页 信息的model -->
-
-<!-- END   编辑 页 信息的model -->
 
 <script type="text/javascript" src="jsp/js/treeCatalogue.js"></script>
 </body>
