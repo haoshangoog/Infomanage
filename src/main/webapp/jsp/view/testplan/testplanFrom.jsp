@@ -107,7 +107,9 @@
             <div class="panel-body">
                 <div id="editCatalogueModel" style="padding: 0% 5%">
                     <div class="row">
-                        <label><h3 id="rootCatagolueName">根目录：根目录名称</h3></label>
+                        <label><h3 id="rootCatagolueNameStr">根目录：根目录名称</h3></label>
+                        <label hidden="hidden"><h3 id="rootCatagolueName"></h3></label>
+                        <label hidden="hidden"><h3 id="rootCatagolueId"></h3></label>
                         <hr style="margin-top:0px ; width: 100% ;border-top-color: black">
                     </div>
                     <div class="row">
@@ -184,11 +186,18 @@
                 <h4 class="modal-title" id="addModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <label for="addCatalogueName">目录名称：</label>
+                    <input type="text" class="form-control" id="addCatalogueName" placeholder="请输入目录名称">
+                </div>
+                <div class="form-group">
+                    <label for="addSequence">目录序列：</label>
+                    <input type="number" class="form-control" id="addSequence" placeholder="请输入目录序列">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addCommit()">创建此条记录</button>
             </div>
         </div>
     </div>
@@ -204,7 +213,7 @@
             <div class="modal-body">
                 <h4 id="deleteCatalogueWarnInfo">您确定要删除此条记录吗？</h4>
                 <div class="form-group" hidden="hidden">
-                    <label for="editCatalogueID">目录ID：</label>
+                    <label for="deleteCatalogueID">目录ID：</label>
                     <input type="text" class="form-control" id="deleteCatalogueID" disabled>
                 </div>
             </div>
@@ -221,11 +230,5 @@
 <!-- END   编辑 页 信息的model -->
 
 <script type="text/javascript" src="jsp/js/treeCatalogue.js"></script>
-<script type="text/javascript">
-    function addButton() {
-        console.log("------ addButton 方法");
-        $('#addModal').modal('show');
-    }
-</script>
 </body>
 </html>

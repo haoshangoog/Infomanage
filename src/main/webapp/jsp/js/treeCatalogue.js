@@ -72,7 +72,7 @@ function showChild(obj){
             // 判断显示的页面
             if($("#editFlag").is(':checked')){
                 console.log("应该显示 【编辑目录】  页面");
-                ShowEditCatalogue(parentsName, msg);
+                ShowEditCatalogue(parentsId,parentsName, msg);
             }else {
                 console.log("应该显示 【编辑内容】  页面");
             }
@@ -108,14 +108,16 @@ function showChild(obj){
 
 
 // 显示 编辑目录页面
-function ShowEditCatalogue(parentsName , childrenCatalogue) {
+function ShowEditCatalogue(parentsId, parentsName , childrenCatalogue) {
 
     console.log("显示 编辑目录页面  ==> ShowEditCatalogue");
     console.log("parentsName: "+parentsName);
     console.log("childrenCatalogue： ");
     console.log(childrenCatalogue);
     //  给 根目录赋值
-    $("#rootCatagolueName").text("根目录： " + parentsName );
+    $("#rootCatagolueNameStr").text("根目录： " + parentsName );
+    $("#rootCatagolueName").text( parentsName );
+    $("#rootCatagolueId").text( parentsId );
     //  给 子目录赋值
     $("#childrenCatalogueList").children().remove();
     $.each(childrenCatalogue, function(i,catalogue){
@@ -132,9 +134,6 @@ function ShowEditCatalogue(parentsName , childrenCatalogue) {
             '</tr>' ;
         $("#childrenCatalogueList").append(child);
     });
-
-
-
 }
 
 // 显示 内容页 页面
@@ -193,7 +192,7 @@ function deleteButton(catalogueID,catalogueName) {
     $('#deleteCatalogueID').val(catalogueID);
     $('#deleteModal').modal('show');
 }
-// 提交删除信息
+// 提交 删除信息
 function deleteCommit() {
     console.log("------ deleteCommit 方法");
     var catalogueID = $('#deleteCatalogueID').val();
@@ -216,4 +215,38 @@ function deleteCommit() {
     });
     // 关闭 模态框
     $('#deleteModal').modal('hide');
+}
+
+// 显示 添加目录 的模态框
+function addButton() {
+    console.log("------ addButton 方法");
+    $('#addModal').modal('show');
+    $('#addModalLabel').text( "添加到： " + $("#rootCatagolueName").text()) ;
+}
+// 提交 添加信息
+function addCommit() {
+    console.log("------ addCommit 方法");
+    var parentsId = $('#rootCatagolueId').text();
+    var catalogueName = $('#addCatalogueName').val();
+    var sequence = $('#addSequence').val() ;
+
+    $.ajax({
+        type: "post",
+        data: {"parentsId":parentsId,"catalogueName":catalogueName,"sequence":sequence},
+        url: "http://localhost:8080/testPlanCatalogue/createTestPlanCatalogue",
+        async: false,
+        dataType: 'html',
+        error : function() {
+            alert("addCommit 方法 出错");
+        },
+        success: function (msg) {
+            if(msg == "0101"){
+                alert("创建成功");
+            }else {
+                alert("创建失败");
+            }
+        }
+    });
+    // 关闭 模态框
+    $('#addModal').modal('hide');
 }
