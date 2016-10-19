@@ -14,11 +14,9 @@
 
 <div class="row">
     <div class="col-md-2">
-        <div class="list-group">
-            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addTestPlanModal">
-                添加测试文档
-            </button>
-        </div>
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addTestPlanModal">
+            添加测试文档
+        </button>
     </div>
     <div class="col-md-10">
         <div id="testPlanPaging"></div>
@@ -29,7 +27,7 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4><a href="javascript:gotoContext(@@@id@)">@@@planname@</a></h4>
+                <h4><a href="javascript:gotoContext(@@@id@)">@@@planname@</a></h4>@@@id@
             </div>
         </div>
     </div>

@@ -150,12 +150,12 @@ function UtilMap() {
     };
 
     var put = function (key, value) {
-        for (var i = 0; i < this.arr.length; i++) {
-            if (this.arr[i].key === key) {
-                this.arr[i].value = value;
-                return;
-            }
-        }
+        // for (var i = 0; i < this.arr.length; i++) {
+        //     if (this.arr[i].key === key) {
+        //         this.arr[i].value = value;
+        //         return;
+        //     }
+        // }
         this.arr[this.arr.length] = new struct(key, value);
     };
 
