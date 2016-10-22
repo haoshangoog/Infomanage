@@ -58,24 +58,20 @@
                     <div class="form-group  ">
                         <label class="control-label col-sm-3">用户名：</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="mailLogin"
-                                   aria-describedby="mailStatus">
+                            <input type="text" class="form-control" id="accountLogin">
                         </div>
                     </div>
                     <div class="form-group  ">
                         <label class="control-label col-sm-3">密码：</label>
                         <div class="col-sm-7">
-                            <input type="password" class="form-control" id="passwordLogin"
-                                   aria-describedby="passwordStatus">
+                            <input type="password" class="form-control" id="passwordLogin">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary"
-                        onclick="">登录
-                </button>
+                <button type="button" class="btn btn-primary" onclick="login()">登录</button>
             </div>
         </div>
     </div>
