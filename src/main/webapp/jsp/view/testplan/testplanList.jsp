@@ -27,7 +27,8 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4><a href="javascript:gotoContext(@@@id@)">@@@planname@</a></h4>@@@id@
+                <h4><a href="javascript:gotoContext(@@@id@)">@@@planname@</a>
+                    <button type="button" class="btn btn-sm" style="float: right" onclick="SHOWMODAL('注意','您确定删除此条记录吗?','deleteTestPlan(@@@id@)')">删除此测试方案</button></h4>
             </div>
         </div>
     </div>

@@ -259,9 +259,6 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1">
-        <button type="button" class="btn btn-default" style="float: right" onclick="deleteTestPlan()">删除此测试方案</button>
-    </div>
 </div>
 
 <!-- START 编辑目录的页面model -->
@@ -325,55 +322,7 @@
         </div>
     </div>
 </div>
-<!-- delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="deleteModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <h4 id="deleteCatalogueWarnInfo">您确定要删除此条记录吗？</h4>
-                <div class="form-group" hidden="hidden">
-                    <label for="deleteCatalogueID">目录ID：</label>
-                    <input type="text" class="form-control" id="deleteCatalogueID" disabled>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="deleteCommit()">删除此条记录</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script type="text/javascript" src="jsp/js/treeCatalogue.js"></script>
-<script type="text/javascript">
-    function deleteTestPlan() {
-        alert("您确定要删除此测试方案吗？");
-        $.ajax({
-            type: "post",
-            data: {"planNameId":localStorage['testPlanId']},
-            url: "http://localhost:8080/testPlan/deleteTestPlan",
-            async: false,
-            dataType: 'html',
-            error : function() {
-                alert("createTestPlan 错误");
-            },
-            success: function (msg) {
-                if(msg == "0103"){
-                    alert("删除成功");
-                    window.location.href="http://localhost:8080/jsp/view/testplan/testplanList.jsp";
-                }else {
-                    alert("删除失败")
-                }
-            }
-        });
-    }
-</script>
 </body>
 </html>
