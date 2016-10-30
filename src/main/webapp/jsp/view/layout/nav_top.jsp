@@ -23,9 +23,19 @@
                 <li><a href="">视频教学</a></li>
                 <li><a href="">文档资料</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#loginModal"
+            <ul id="loginUl" class="nav navbar-nav navbar-right">
+                <li ><a data-toggle="modal" data-target="#loginModal"
                        data-whatever="@mdo">登录</a></li>
+            </ul>
+            <ul id="userCenterUl"class="nav navbar-nav nav-pills navbar-right" role="tablist">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        用户中心
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a onclick="logout()">退出</a></li>
+                    </ul>
+                </li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
