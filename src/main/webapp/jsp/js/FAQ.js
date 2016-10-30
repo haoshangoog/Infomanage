@@ -17,6 +17,7 @@ function createFAQ() {
             success: function (msg) {
                 if(msg == "0101"){
                     alert("创建成功");
+                    window.location.href="http://localhost:8080/jsp/view/testplan/testplanList.jsp";
                 }else {
                     alert("创建失败")
                 }
