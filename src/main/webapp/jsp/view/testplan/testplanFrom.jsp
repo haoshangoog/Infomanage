@@ -87,6 +87,15 @@
             color: #316a91;
             padding-left: 30px;
         }
+
+        table{
+            table-layout:fixed;
+        }
+
+        td {
+            white-space:normal;
+            word-wrap:break-word;
+        }
     </style>
 </head>
 <body>
