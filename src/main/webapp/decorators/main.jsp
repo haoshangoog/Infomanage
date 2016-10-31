@@ -42,6 +42,7 @@
 	<script type="text/javascript" src="<%=basePath%>jsp/js/login.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/TestPlan.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/js/FAQ.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jsp/js/User.js"></script>
 	<title>
 		<sitemesh:write property='title' />
 	</title>
