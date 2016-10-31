@@ -214,16 +214,18 @@ function getPagingHtmlString2(InsertID, ModelId, PerId, NextId, TotalPageId, Act
     var per = PageNo - 1;
     var next = PageNo + 1;
     if(per > 0){
-        $(PerId).append('<button type="button" class="btn btn-default btn-sm" onclick="paging2(InsertID, ModelId,PerId,NextId,TotalPageId,ActionName,per,functionName)">前一页</button>')
+        $(PerId).append('<button type="button" class="btn btn-default btn-sm" ' +
+            'onclick="paging2(\''+InsertID+'\',\''+ModelId+'\',\''+PerId+'\',\''+NextId+'\',\''+TotalPageId+'\',\''+ActionName+'\',\''+per+'\',\''+functionName+'\')">前一页</button>')
     }else {
         $(PerId).append('<button type="button" class="btn btn-default btn-sm" disabled="disabled">前一页</button>')
     }
     if(PageNumber - next >= 0){
-        $(NextId).append('<button type="button" class="btn btn-default btn-sm" onclick="paging2(InsertID, ModelId,PerId,NextId,TotalPageId,ActionName,next,functionName)">后一页</button>')
+        $(NextId).append('<button type="button" class="btn btn-default btn-sm" ' +
+            'onclick="paging2(\''+InsertID+'\',\''+ModelId+'\',\''+PerId+'\',\''+NextId+'\',\''+TotalPageId+'\',\''+ActionName+'\',\''+next+'\',\''+functionName+'\')">后一页</button>')
     }else {
         $(NextId).append('<button type="button" class="btn btn-default btn-sm" disabled="disabled" >后一页</button>')
     }
-    $(TotalPageId).append(PageNo + "/" + PageNumber + ' 页');
+    $(TotalPageId).append('<span>'+PageNo + "/" + PageNumber + ' 页</span>');
 }
 
 
