@@ -167,6 +167,32 @@ public class UserAction extends BaseAction {
         System.out.println("发送数据=="+gson.toJson(pager));
     }
 
+    public void selectUserById() throws Exception {
+        System.out.println("---》selectUserById 方法");
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out    = response.getWriter();
+        String userId = request.getParameter("userId");
+        if(userId == null ||userId == ""){
+            System.out.print("用户 ID 不正确");
+            out.print(CommonKey.PARAMETERDEFICIENCY);
+            return;
+        }
+        User user = null;
+        try {
+            user = userService.FindByID(Integer.parseInt(userId));
+        } catch (Exception e) {
+            System.out.println("深层调用导致登陆失败");
+            out.print(CommonKey.DELETESUCCESS);
+            e.printStackTrace();
+            return;
+        }
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson((User)user));
+    }
+
+
+
     public void login() throws Exception {
         System.out.println("---》login 方法");
         // 用户登陆
