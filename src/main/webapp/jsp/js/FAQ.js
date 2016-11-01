@@ -17,7 +17,7 @@ function createFAQ() {
             success: function (msg) {
                 if(msg == "0101"){
                     alert("创建成功");
-                    window.location.href="http://localhost:8080/jsp/view/testplan/testplanList.jsp";
+                    window.location.href="/jsp/view/testplan/testplanList.jsp";
                 }else {
                     alert("创建失败")
                 }
@@ -59,7 +59,7 @@ function editFAQ() {
         success: function (msg) {
             if(msg == "0105"){
                 alert("更新成功");
-                window.location.href="http://localhost:8080/jsp/view/FAQ/FAQList.jsp";
+                window.location.href="/jsp/view/FAQ/FAQList.jsp";
             }else {
                 alert("更新失败")
             }
@@ -80,7 +80,7 @@ function deleteFAQ(id) {
         success: function (msg) {
             if(msg == "0103"){
                 alert("删除成功");
-                window.location.href="http://localhost:8080/jsp/view/FAQ/FAQList.jsp";
+                window.location.href="/jsp/view/FAQ/FAQList.jsp";
             }else {
                 alert("删除失败")
             }

@@ -6,7 +6,7 @@ function login() {
     $.ajax({
         type: "post",
         data: {"accountName":account,"password":password},
-        url: "http://localhost:8080/user/login",
+        url: "/user/login",
         async: false,
         dataType: 'html',
         error : function() {

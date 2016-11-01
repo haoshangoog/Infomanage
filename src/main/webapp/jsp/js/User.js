@@ -77,7 +77,7 @@ function createUser() {
                 if(msg == "0101"){
                     alert("创建成功");
                     $("#UserModal").modal("hide");
-                    window.location.href="http://localhost:8080/jsp/view/admin/userManagement.jsp";
+                    window.location.href="/jsp/view/admin/userManagement.jsp";
                 }else {
                     alert("创建失败")
                 }
@@ -157,7 +157,7 @@ function updateUser() {
             if(msg == "0105"){
                 alert("更新成功");
                 $("#UserModal").modal("hide");
-                window.location.href="http://localhost:8080/jsp/view/admin/userManagement.jsp";
+                window.location.href="/jsp/view/admin/userManagement.jsp";
             }else{
                 alert("更新失败");
                 $("#UserModal").modal("hide");
@@ -180,7 +180,7 @@ function deleteUser() {
         success: function (msg) {
             if(msg == "0103"){
                 alert("禁用成功");
-                window.location.href="http://localhost:8080/jsp/view/admin/userManagement.jsp";
+                window.location.href="/jsp/view/admin/userManagement.jsp";
             }else {
                 alert("禁用失败");
                 $("#UserModal").modal("hide");

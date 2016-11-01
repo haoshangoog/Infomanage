@@ -9,7 +9,7 @@ $("#addCommitContextButton").hide();
 $.ajax({
     type: "post",
     data: {"testPlanId":TESTPLANID},
-    url: "http://localhost:8080/testPlanCatalogue/selectFristCatalogue",
+    url: "/testPlanCatalogue/selectFristCatalogue",
     async: false,
     dataType: 'json',
     error : function() {
@@ -24,7 +24,7 @@ $.ajax({
 $.ajax({
     type: "post",
     data: {"parentsCatalogueId":FRISTCATALOGUEID,"deleteflag":0},
-    url: "http://localhost:8080/testPlanCatalogue/selectChildCatalogue",
+    url: "/testPlanCatalogue/selectChildCatalogue",
     async: false,
     dataType: 'json',
     error : function() {
@@ -73,7 +73,7 @@ function showChild(obj){
     $.ajax({
         type: "post",
         data: {"parentsCatalogueId":parentsId,"deleteflag":0},
-        url: "http://localhost:8080/testPlanCatalogue/selectChildCatalogue",
+        url: "/testPlanCatalogue/selectChildCatalogue",
         async: false,
         dataType: 'json',
         error : function() {
@@ -174,7 +174,7 @@ function ShowEditContextPage(catalogueID,catalogueName) {
     $.ajax({
         type: "post",
         data: {"catalogueId":catalogueID},
-        url: "http://localhost:8080/testPlanContext/selectContextByCatalogueId",
+        url: "/testPlanContext/selectContextByCatalogueId",
         async: false,
         dataType: 'json',
 
@@ -248,7 +248,7 @@ function editCommit() {
     $.ajax({
         type: "post",
         data: {"catalogueId":catalogueID,"catalogueName":catalogueName,"sequence":sequence},
-        url: "http://localhost:8080/testPlanCatalogue/updateTestPlanCatalogue",
+        url: "/testPlanCatalogue/updateTestPlanCatalogue",
         async: false,
         dataType: 'html',
         error : function() {
@@ -280,7 +280,7 @@ function deleteCommit() {
     $.ajax({
         type: "post",
         data: {"catalogueId":catalogueID},
-        url: "http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue",
+        url: "/testPlanCatalogue/deleteTestPlanCatalogue",
         async: false,
         dataType: 'html',
         error : function() {
@@ -314,7 +314,7 @@ function addCommit() {
     $.ajax({
         type: "post",
         data: {"parentsId":parentsId,"catalogueName":catalogueName,"sequence":sequence},
-        url: "http://localhost:8080/testPlanCatalogue/createTestPlanCatalogue",
+        url: "/testPlanCatalogue/createTestPlanCatalogue",
         async: false,
         dataType: 'html',
         error : function() {
@@ -394,7 +394,7 @@ function editCommitContextButton(){
             "testConclusion":testConclusion,
             "remark":remark,
         },
-        url: "http://localhost:8080/testPlanContext/updateTestPlanContext",
+        url: "/testPlanContext/updateTestPlanContext",
         async: false,
         dataType: 'html',
         error : function() {
@@ -478,7 +478,7 @@ function addCommitContextButton() {
             "testConclusion":testConclusion,
             "remark":remark,
         },
-        url: "http://localhost:8080/testPlanContext/createTestPlanContext",
+        url: "/testPlanContext/createTestPlanContext",
         async: false,
         dataType: 'html',
         error : function() {

@@ -58,11 +58,11 @@
 
 <script type="text/javascript">
 
-    pagingStart('#testPlanPaging', '#testPlanPaging_Model', 'http://localhost:8080/testPlan/pageingTestPlan?pageSize=5&deleteflag=0');
+    pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteflag=0');
 
     function gotoContext(id) {
         localStorage['testPlanId'] = id;
-        window.location.href="http://localhost:8080/jsp/view/testplan/testplanFrom.jsp";
+        window.location.href="/jsp/view/testplan/testplanFrom.jsp";
     }
     
     function createTestPlan() {
@@ -74,7 +74,7 @@
             $.ajax({
                 type: "post",
                 data: {"planName":planName},
-                url: "http://localhost:8080/testPlan/createTestPlan",
+                url: "/testPlan/createTestPlan",
                 async: false,
                 dataType: 'html',
                 error : function() {
