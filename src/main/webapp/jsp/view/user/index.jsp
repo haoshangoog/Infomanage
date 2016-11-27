@@ -9,11 +9,6 @@
 
 <body>
 <div class="col-md-12">
-    <%--<div class="jumbotron">--%>
-        <%--<h1>信息管理系统</h1>--%>
-        <%--<p>在这里你可以 干这个 干那个 还可以 干那个那个。。。</p>--%>
-        <%--<p><a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a></p>--%>
-    <%--</div>--%>
     <div class="col-md-3">
         <h3>测试方案</h3>
         <div id="testPlanPaging"></div>
