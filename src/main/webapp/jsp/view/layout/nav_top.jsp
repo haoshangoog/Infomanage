@@ -40,12 +40,12 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
+            <%--<form class="navbar-form navbar-right" role="search">--%>
+                <%--<div class="form-group">--%>
+                    <%--<input type="text" class="form-control" placeholder="Search">--%>
+                <%--</div>--%>
+                <%--<button type="submit" class="btn btn-default">搜索</button>--%>
+            <%--</form>--%>
 
         </div>
         <!-- /.navbar-collapse -->
