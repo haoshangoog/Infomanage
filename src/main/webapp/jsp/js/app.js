@@ -1,6 +1,6 @@
 $(document).ready(function() {
     LoginUserCenterSwitch();
-
+    authority();
 
 
 
@@ -34,5 +34,42 @@ function SHOWMODAL(title,body,functionName) {
     if(demo.length == 0){
         $("body").append(html);
         $("#SHOWMODAL").modal("show");
+    }
+}
+
+
+// 权限的实现方法
+function authority() {
+    var objs = $(".authority");
+    if (sessionStorage["userSession"] == null || sessionStorage["userSession"] == ''){
+        objs.remove();
+        return
+    }
+    var userSession = sessionStorage["userSession"];
+    var identity = JSON.parse(sessionStorage["userSession"])['identity'];
+    var userIs = "__";
+    if(identity == 1){
+        userIs = "user"
+    }else if(identity == 2){
+        userIs = "admin"
+    }
+    for (var i = 0 ;i<objs.length;i++) {
+        var authorityAttribute = objs[i].getAttribute('authority');
+        if( authorityAttribute != null){
+            var authorityUserArrary = objs[i].getAttribute('authority').split("|");
+            if(authorityUserArrary!="" || authorityUserArrary.length != 0 ){
+                var showIt = false
+                for(var k =0 ; k < authorityUserArrary.length ; k++){
+                    if(authorityUserArrary[k] == userIs){
+                        showIt = true
+                        return
+                    }
+                }
+                if(!showIt){
+                    objs[i].remove();
+                }
+            };
+        }
+
     }
 }

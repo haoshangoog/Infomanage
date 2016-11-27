@@ -49,7 +49,7 @@
 	<sitemesh:write property='head' />
 	
 </head>
-<body style="background-size: 100%">
+<body >
 	<jsp:include page="/jsp/view/layout/nav_top.jsp"></jsp:include>
 	<div class="container-fluid">
 			<sitemesh:write property='body'/>

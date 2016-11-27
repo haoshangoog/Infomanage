@@ -70,7 +70,7 @@ function LoginUserCenterSwitch() {
                 if(msg == "1107"){
                     console.log("未登录");
                 }else if(JSON.parse(msg).id != null){
-                    sessionStorage["userSession"] = JSON.parse(msg);
+                    sessionStorage["userSession"] = msg;
                     $("#loginUl").hide();
                     $("#userCenterUl").show();
                 }else {
