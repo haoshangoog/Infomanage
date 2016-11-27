@@ -54,5 +54,14 @@
 	<div class="container-fluid">
 			<sitemesh:write property='body'/>
     </div>
+	<footer>
+		<div style="position: fixed;background-color: #323232;width: 100%;height: 100%;
+					text-align: center;z-index: 999;top: 88%;opacity: 0.8;">
+			<div style="color: white;padding-top: 20px;">
+				瑞斯康达科技发展股份有限公司
+				<p>Copyright © 2016 Raisecom Technology Co., Ltd.  </p>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
