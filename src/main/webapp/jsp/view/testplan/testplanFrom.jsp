@@ -101,7 +101,7 @@
 <body>
 <div class="row">
     <div class="col-md-2" id="id1">
-        <div class="switch">
+        <div class="switch authority" authority="admin|user">
             <label>编辑目录：</label>
             <input id="editFlag" type="checkbox" onclick="onClickEdit()"/>
         </div>
@@ -145,16 +145,16 @@
                         <label><h3 id="rootCatagolueNameStr_Context">请选择目录</h3></label>
                         <label hidden="hidden"><h3 id="rootCatagolueName_Context"></h3></label>
                         <label hidden="hidden"><h4 id="rootCatagolueId_Context"></h4></label>
-                        <button id="editContextButton"type="button" class="btn btn-default btn-sm" onclick="editContextButton()" style="float: right" >
+                        <button id="editContextButton"type="button" class="btn btn-default btn-sm authority" authority="admin|user" onclick="editContextButton()" style="float: right" >
                             修改此内容
                         </button>
-                        <button id="editCommitContextButton"type="button" class="btn btn-default btn-sm" onclick="editCommitContextButton()" style="float: right" >
+                        <button id="editCommitContextButton"type="button" class="btn btn-default btn-sm authority" authority="admin|user" onclick="editCommitContextButton()" style="float: right" >
                             提交修改内容
                         </button>
-                        <button id="addContextButton" type="button" class="btn btn-default btn-sm" onclick="addContextButton()" style="float: right" >
+                        <button id="addContextButton" type="button" class="btn btn-default btn-sm authority" authority="admin|user" onclick="addContextButton()" style="float: right" >
                             创建内容
                         </button>
-                        <button id="addCommitContextButton"type="button" class="btn btn-default btn-sm" onclick="addCommitContextButton()" style="float: right" >
+                        <button id="addCommitContextButton"type="button" class="btn btn-default btn-sm authority" authority="admin|user" onclick="addCommitContextButton()" style="float: right" >
                             提交创建改内容
                         </button>
                         <hr style="margin-top:0px ; width: 100% ;border-top-color: black">

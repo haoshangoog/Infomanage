@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-2">
-        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addFAQModal">
+        <button type="button" class="btn btn-primary btn-md authority" authority="admin|user" data-toggle="modal" data-target="#addFAQModal">
             添加FAQ
         </button>
     </div>
@@ -21,9 +21,9 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4><a href="javascript:gotoContext(@@@id@)">@@@question@</a>
-                    <button type="button" class="btn btn-sm" style="float: right"
+                    <button type="button" class="btn btn-sm authority" authority="admin|user" style="float: right"
                             onclick="SHOWMODAL('注意','您确定删除此条FAQ记录吗?','deleteFAQ(@@@id@)')">删除此FAQ</button>
-                    <button type="button" class="btn btn-sm" style="float: right"
+                    <button type="button" class="btn btn-sm authority" authority="admin|user" style="float: right"
                             onclick="showEditFAQ('@@@id@','@@@question@','@@@answer@')">编辑</button>
                     <button type="button" class="btn btn-sm" style="float: right"
                             onclick="showFAQ('@@@id@','@@@question@','@@@answer@')">查看</button>

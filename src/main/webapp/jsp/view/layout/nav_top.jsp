@@ -19,7 +19,7 @@
                 <li><a href="<%=request.getContextPath()%>jsp/view/FAQ/FAQList.jsp">FAQ</a></li>
                 <li><a href="">视频教学</a></li>
                 <li><a href="">文档资料</a></li>
-                <li class="dropdown authority" authority="admin" hidden="hidden">
+                <li class="dropdown authority" authority="admin">
                     <a class="dropdown-toggle" data-toggle="dropdown">管理员维护</a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/jsp/view/admin/userManagement.jsp">用户管理</a></li>

@@ -28,7 +28,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4><a href="javascript:gotoContext(@@@id@)">@@@planname@</a>
-                    <button type="button" class="btn btn-sm" style="float: right" onclick="SHOWMODAL('注意','您确定删除此条记录吗?','deleteTestPlan(@@@id@)')">删除此测试方案</button></h4>
+                    <button  type="button" class="btn btn-sm authority" authority="admin" style="float: right" onclick="SHOWMODAL('注意','您确定删除此条记录吗?','deleteTestPlan(@@@id@)')">删除此测试方案</button></h4>
             </div>
         </div>
     </div>
