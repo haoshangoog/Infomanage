@@ -269,14 +269,11 @@ function editCommit() {
 // 显示 删除目录 模态框
 function deleteButton(catalogueID,catalogueName) {
     console.log("------ deleteButton 方法");
-    $('#deleteModalLabel').text( "删除： " + catalogueName ) ;
-    $('#deleteCatalogueID').val(catalogueID);
-    $('#deleteModal').modal('show');
+    SHOWMODAL("删除： " + catalogueName ,"您确定要删除此条记录吗？","deleteCommit("+catalogueID+")")
 }
 // 提交 删除信息
-function deleteCommit() {
+function deleteCommit(catalogueID) {
     console.log("------ deleteCommit 方法");
-    var catalogueID = $('#deleteCatalogueID').val();
     $.ajax({
         type: "post",
         data: {"catalogueId":catalogueID},
@@ -289,6 +286,7 @@ function deleteCommit() {
         success: function (msg) {
             if(msg == "0103"){
                 alert("删除成功");
+                window.location.reload();
             }else {
                 alert("删除失败");
             }
