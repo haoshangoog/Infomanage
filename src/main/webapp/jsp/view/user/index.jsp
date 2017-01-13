@@ -32,7 +32,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script type="text/javascript">
     pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteflag=0', false);
