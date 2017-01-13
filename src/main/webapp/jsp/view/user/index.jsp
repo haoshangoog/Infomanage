@@ -19,7 +19,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="col-md-3 col-md-offset-6">
         <h3>FAQ</h3>
