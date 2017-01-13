@@ -22,6 +22,7 @@ public class BaseAction extends ActionSupport implements SessionAware,ServletReq
 		this.response.setHeader("Access-Control-Max-Age", "3600");
 		this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		this.response.setHeader("Access-Control-Allow-Credentials","true");
+
 	}
 
 	@Override
