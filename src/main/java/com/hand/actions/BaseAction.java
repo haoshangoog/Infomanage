@@ -17,6 +17,11 @@ public class BaseAction extends ActionSupport implements SessionAware,ServletReq
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
+		this.response.setHeader("Access-Control-Allow-Origin", "*");
+		this.response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		this.response.setHeader("Access-Control-Max-Age", "3600");
+		this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		this.response.setHeader("Access-Control-Allow-Credentials","true");
 	}
 
 	@Override
