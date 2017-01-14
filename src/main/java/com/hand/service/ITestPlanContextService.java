@@ -2,6 +2,7 @@ package com.hand.service;
 
 import com.hand.entity.TestPlanContext;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public interface ITestPlanContextService {
     /*
     *	创建测试方案内容页
      */
-    public void createTestPlanContext(TestPlanContext testPlanContext) throws Exception;
+    public int createTestPlanContext(TestPlanContext testPlanContext) throws Exception;
 
     /*
     *	删除测试方案内容页

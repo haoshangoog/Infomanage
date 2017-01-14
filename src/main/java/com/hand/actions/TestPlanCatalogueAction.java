@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hand.commonKey.CommonKey;
 import com.hand.entity.TestPlanCatalogue;
+import com.hand.entity.TestPlanContext;
 import com.hand.paging.PagingService;
 import com.hand.service.ITestPlanCatalogueService;
+import com.hand.service.ITestPlanContextService;
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;
@@ -15,6 +17,9 @@ public class TestPlanCatalogueAction extends BaseAction {
 
     @Resource(name = "testPlanCatalogueService")
     private ITestPlanCatalogueService testPlanCatalogueService;
+
+    @Resource(name = "testPlanContextService")
+    private ITestPlanContextService testPlanContextService;
 
     @Resource(name = "pagingService")
     private PagingService<TestPlanCatalogue> pagingTestPlanCatalogueService;
@@ -26,9 +31,12 @@ public class TestPlanCatalogueAction extends BaseAction {
         PrintWriter out = response.getWriter();
 
         System.out.println("---》createTestPlanCatalogue 方法");
+        //  获取参数并进行校验
         String catalogueName = request.getParameter("catalogueName");
         String parentsId     = request.getParameter("parentsId");
         String sequence      = request.getParameter("sequence");
+        String textPlanContext = request.getParameter("textPlanContext");
+
         if (catalogueName == null ||parentsId == null || sequence == null)
         {
             System.out.println("由于参数导致创建失败--catalogueName/parentsId/sequence 没有写");
@@ -45,6 +53,10 @@ public class TestPlanCatalogueAction extends BaseAction {
         testPlanCatalogue.setTestPlanId(testPlanCatalogueParents.getTestPlanId());
         testPlanCatalogue.setParentsId(Integer.parseInt(parentsId));
         testPlanCatalogue.setSequence(Integer.parseInt(sequence));
+        // 创建内容页
+        TestPlanContext testPlanContext = new TestPlanContext();
+        testPlanContext.setTestPlanContext(textPlanContext);
+        testPlanCatalogue.setTestPlanContextId(testPlanContextService.createTestPlanContext(testPlanContext));
 
         try {
             testPlanCatalogueService.createTestPlanCatalogue(testPlanCatalogue);
@@ -68,6 +80,7 @@ public class TestPlanCatalogueAction extends BaseAction {
         String catalogueName = request.getParameter("catalogueName");
         String parentsId     = request.getParameter("parentsId");
         String sequence      = request.getParameter("sequence");
+        String textPlanContext = request.getParameter("textPlanContext");
 
         if (catalogueId==null)
         {
@@ -83,7 +96,11 @@ public class TestPlanCatalogueAction extends BaseAction {
         if(catalogueName != null) testPlanCatalogue.setCatalogueName(catalogueName);
         if(parentsId     != null) testPlanCatalogue.setParentsId(Integer.parseInt(parentsId));
         if(sequence      != null) testPlanCatalogue.setSequence(Integer.parseInt(sequence));
-
+        if(textPlanContext!= null) {
+            TestPlanContext testPlanContext = testPlanContextService.FindByID(testPlanCatalogue.getTestPlanContextId());
+            testPlanContext.setTestPlanContext(textPlanContext);
+            testPlanContextService.updateTestPlanContext(testPlanContext);
+        }
         try {
             testPlanCatalogueService.updateTestPlanCatalogue(testPlanCatalogue);
         } catch (Exception e) {
@@ -153,20 +170,41 @@ public class TestPlanCatalogueAction extends BaseAction {
         out.print(gson.toJson(testPlanCatalogueList));
     }
 
-    // 获取 第一目录
-    public void selectFristCatalogue() throws Exception{
+    public void getAllCatalogue() throws Exception{
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        System.out.println("---》selectFristCatalogue 方法");
+        System.out.println("---》getAllCatalogue 方法");
         String testPlanId   = request.getParameter("testPlanId");
         String sql ="";
-            sql ="SELECT * FROM testPlanCatalogue " +
-                    "where parentsId=0 and sequence=0 and testPlanId="+Integer.parseInt(testPlanId);
+        sql ="SELECT * FROM testPlanCatalogue " +
+                "where parentsId=0 and sequence=0 and testPlanId="+Integer.parseInt(testPlanId);
         System.out.println("selectFristCatalogue SQL 查询语句："+sql);
         List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
+        if (testPlanCatalogueList != null){
+            testPlanCatalogueList = getAllCatalogue(testPlanCatalogueList.get(0).getId());
+        }
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson(testPlanCatalogueList));
+    }
+
+    public List<TestPlanCatalogue> getAllCatalogue(int parentId) throws Exception {
+        String sql = "SELECT * FROM testPlanCatalogue " +
+                "where parentsId = " + parentId + " and deleteflag=0" +
+                " order by sequence";
+        System.out.print(sql);
+        List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
+        if(testPlanCatalogueList == null){
+            return null;
+        }else {
+            for (int i = 0 ;i < testPlanCatalogueList.size() ;i++) {
+                List<TestPlanCatalogue> children = getAllCatalogue(testPlanCatalogueList.get(i).getId());
+                if(children != null){
+                    testPlanCatalogueList.get(i).setChildren(children);
+                }
+            }
+            return testPlanCatalogueList;
+        }
     }
 }
