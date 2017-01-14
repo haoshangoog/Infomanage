@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 
 @Transactional
@@ -17,8 +18,8 @@ public class TestPlanContextService implements ITestPlanContextService {
     private ITestPlanContextDao testPlanContextDao;
 
     @Override
-    public void createTestPlanContext(TestPlanContext testPlanContext) throws Exception {
-        testPlanContextDao.Create(testPlanContext);
+    public int createTestPlanContext(TestPlanContext testPlanContext) throws Exception {
+        return (int)testPlanContextDao.Create(testPlanContext);
     }
 
     @Override
