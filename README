@@ -35,7 +35,7 @@ http://localhost:8080/user/pageingUser?PageNo=1&identity=1
 http://localhost:8080/user/isLogin
 返回值：{"id":1,"accountName":"yang0","realName":"yangyi0","password":"0","identity":1,"deleteFlag":1}
 
-7.selectUserById
+8.selectUserById
 http://localhost:8080/user/selectUserById?userId=1
 参数       userId: 用户ID
 返回值：{"id":1,"accountName":"yang0","realName":"yangyi0","password":"0","identity":1,"deleteFlag":1}
@@ -65,36 +65,35 @@ http://localhost:8080/testPlan/pageingTestPlan?pageNo=1&pageSize=5&deleteflag=0
 返回值     json 字符串
 
 ////////////////////////////////////测试方案目录////////////////////////////////////////
-5. createTestPlanCatalogue 创建子目录
+1. createTestPlanCatalogue 创建子目录
 http://localhost:8080/testPlanCatalogue/createTestPlanCatalogue?catalogueName=目录1&parentsId=1&sequence=1&textPlanContext={}
 参数      catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列  textPlanContext: 测试方案内容
 返回值     0101：创建成功
 
-6. createTestPlanCatalogue 更新子目录
-http://localhost:8080/testPlanCatalogue/updateTestPlanCatalogue?catalogueId=3&catalogueName=目录1&parentsId=2&sequence=2&textPlanContext={}
-参数      catalogueId：目录的id    catalogueName：目录名称      parentsId： 父级   sequence：兄弟级序列   textPlanContext: 测试方案内容
+2. updateTestPlanForm 更新目录
+http://localhost:8080/testPlanCatalogue/updateTestPlanForm
+参数   Content-Disposition: form-data; name="testPlanForm"
+      {"id":4,"catalogueName":"目录5","parentsId":1,"sequence":2,"testPlanId":1,"testPlanContextId":3,"deleteFlag":0,"testPlanContext":{"testPlanContext":"{\"testPlanID\":\"1\",\"testProject\":\"testProject\",\"testPlanPurpose\":\"testPlanPurpose\",\"requirementID\":\"requirementID\",\"topologicalID\":\"topologicalID\",\"testContextAndResult\":[{\"context\":\"AAA\",\"result\":\"aaa\"},{\"context\":\"AAA\",\"result\":\"aaa\"},{\"context\":\"AAA\",\"result\":\"aaa\"},{\"context\":\"AAA\",\"result\":\"aaa\"}],\"NorthInterface\":\"North-Interface\",\"testSample\":\"Test sample\"}"}}
 返回值      0105：更新成功
 
-7. deleteTestPlanCatalogue 删除子目录
+3. deleteTestPlanCatalogue 删除子目录
 http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
 参数      catalogueId：目录的id
 返回值     0103：删除成功
 
-8. selectChildCatalogue  查询子目录
+4. getTestContextPlanForm 查询
+http://localhost:8080/testPlanCatalogue/getTestContextPlanForm?catalogueId=4
+参数      catalogueId：目录的id
+返回值    json 字符串
+
+5. selectChildCatalogue  查询子目录
 http://localhost:8080/testPlanCatalogue/selectChildCatalogue?parentsCatalogueId=1&deleteflag=0
 参数      parentsCatalogueId：父级目录的id  deleteflag：是否是删除的目录
 返回值     json 字符串
 
-10. getAllCatalogue 以json树的形式获取全部的目录
+6. getAllCatalogue 以json树的形式获取全部的目录
 http://localhost:8085/testPlanCatalogue/getAllCatalogue?testPlanId=1
 参数      testPlanId：测试方案的ID
-返回值     json 字符串
-
-////////////////////////////////////测试方案内容页////////////////////////////////////////
-
-13. selectContextByCatalogueId  通过目录id 获取内容页
-http://localhost:8080/testPlanContext/selectContextByCatalogueId?catalogueId=1
-参数       catalogueId： 测试方案目录id
 返回值     json 字符串
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

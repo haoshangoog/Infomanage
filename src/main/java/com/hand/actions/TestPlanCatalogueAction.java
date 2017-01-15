@@ -70,37 +70,25 @@ public class TestPlanCatalogueAction extends BaseAction {
         out.print(CommonKey.CREATESUCCESS);
     }
 
-    public void updateTestPlanCatalogue() throws Exception {
+    public void updateTestPlanForm() throws Exception {
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-
         System.out.println("---》updateTestPlanCatalogue 方法");
-        String catalogueId   = request.getParameter("catalogueId");
-        String catalogueName = request.getParameter("catalogueName");
-        String parentsId     = request.getParameter("parentsId");
-        String sequence      = request.getParameter("sequence");
-        String textPlanContext = request.getParameter("textPlanContext");
 
-        if (catalogueId==null)
-        {
-            System.out.println("由于参数导致创建失败--catalogueId 缺失");
-            out.print(CommonKey.PARAMETERDEFICIENCY);
-            return;
-        }
-        TestPlanCatalogue testPlanCatalogue = testPlanCatalogueService.FindByID(Integer.parseInt(catalogueId));
+        String testPlanForm =request.getParameter("testPlanForm");
+        Gson gson = new Gson();
+        TestPlanCatalogue testPlanCatalogue = gson.fromJson(testPlanForm,TestPlanCatalogue.class);
+
+        TestPlanCatalogue testPlanCatalogue2 = testPlanCatalogueService.FindByID(testPlanCatalogue.getId());
         if(testPlanCatalogue ==null){
             System.out.println("更新的目录不存在");
             return;
         }
-        if(catalogueName != null) testPlanCatalogue.setCatalogueName(catalogueName);
-        if(parentsId     != null) testPlanCatalogue.setParentsId(Integer.parseInt(parentsId));
-        if(sequence      != null) testPlanCatalogue.setSequence(Integer.parseInt(sequence));
-        if(textPlanContext!= null) {
-            TestPlanContext testPlanContext = testPlanContextService.FindByID(testPlanCatalogue.getTestPlanContextId());
-            testPlanContext.setTestPlanContext(textPlanContext);
-            testPlanContextService.updateTestPlanContext(testPlanContext);
-        }
+        TestPlanContext testPlanContext = testPlanContextService.FindByID(testPlanCatalogue2.getTestPlanContextId());
+        testPlanContext.setTestPlanContext(testPlanCatalogue.getTestPlanContext().getTestPlanContext());
+        testPlanContextService.updateTestPlanContext(testPlanContext);
+
         try {
             testPlanCatalogueService.updateTestPlanCatalogue(testPlanCatalogue);
         } catch (Exception e) {
@@ -143,6 +131,27 @@ public class TestPlanCatalogueAction extends BaseAction {
         }
         System.out.println("删除成功");
         out.print(CommonKey.DELETESUCCESS);
+    }
+
+    public void getTestContextPlanForm() throws Exception{
+        System.out.print("---》getTestContextPlanForm 方法");
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String catalogueId   = request.getParameter("catalogueId");
+
+        if(catalogueId==null){
+            System.out.println("由于参数导致创建失败-- catalogueId 缺失");
+            out.print(CommonKey.PARAMETERDEFICIENCY);
+            return;
+        }
+        TestPlanCatalogue testPlanCatalogue = testPlanCatalogueService.FindByID(Integer.parseInt(catalogueId));
+        testPlanCatalogue.setTestPlanContext(testPlanContextService.FindByID(testPlanCatalogue.getTestPlanContextId()));
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(testPlanCatalogue));
+
     }
 
     // 获取目录的子目录
