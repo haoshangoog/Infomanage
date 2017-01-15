@@ -179,7 +179,7 @@ public class TestPlanCatalogueAction extends BaseAction {
         String testPlanId   = request.getParameter("testPlanId");
         String sql ="";
         sql ="SELECT * FROM testPlanCatalogue " +
-                "where parentsId=0 and sequence=0 and testPlanId="+Integer.parseInt(testPlanId);
+                "where parentsId=0 and sequence=0 and testPlanId="+Integer.parseInt(testPlanId)+" and deleteflag=0";
         System.out.println("selectFristCatalogue SQL 查询语句："+sql);
         List<TestPlanCatalogue> testPlanCatalogueList = testPlanCatalogueService.FindBySQL(sql);
         if (testPlanCatalogueList != null){

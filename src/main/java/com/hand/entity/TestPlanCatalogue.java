@@ -1,8 +1,7 @@
 package com.hand.entity;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
+//import com.google.gson.annotations.SerializedName;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -21,7 +20,6 @@ public class TestPlanCatalogue implements Serializable {
 
     @Column(name="catalogueName")
     @Expose
-    @SerializedName("label")
     private String catalogueName;
 
     @Column(name="parentsId")
