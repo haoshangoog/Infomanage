@@ -1,4 +1,4 @@
-<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<template >
   <div id="testPlanList">
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
@@ -97,7 +97,7 @@
               <div class="">目录名称</div>
             </el-col>
             <el-col :span="6">
-              <el-input v-model="testPlan.testPlanID" placeholder="请输入内容"></el-input>
+              <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanID" placeholder="请输入内容"></el-input>
             </el-col>
           </el-row>
           <el-row :gutter="20">
@@ -220,7 +220,8 @@
             </el-col>
           </el-row>
           <el-row :gutter="20">
-            <el-button v-on:click="updateTestPlanContext">确认提交</el-button>
+            <el-button v-on:click="updateTestPlanForm">确认提交</el-button>
+            <el-button v-on:click="getTestPlanForm">获取</el-button>
           </el-row>
         </div>
       </el-col>
@@ -258,21 +259,6 @@
               'testSample': 'Test sample'
             }
           }
-        },
-        testPlan: {
-          'testPlanID': '1',
-          'testProject': 'testProject',
-          'testPlanPurpose': 'testPlanPurpose',
-          'requirementID': 'requirementID',
-          'topologicalID': 'topologicalID',
-          'testContextAndResult': [
-            {'context': 'AAA', 'result': 'aaa'},
-            {'context': 'AAA', 'result': 'aaa'},
-            {'context': 'AAA', 'result': 'aaa'},
-            {'context': 'AAA', 'result': 'aaa'}
-          ],
-          'NorthInterface': 'North-Interface',
-          'testSample': 'Test sample'
         },
         allCatalogue: [],
         defaultProps: {
@@ -314,8 +300,23 @@
         var vm = this
         vm.testPlanForm.testPlanContext.testPlanContext.testContextAndResult.splice(index, 1)
       },
+      // 获取 testPlanForm
+      getTestPlanForm () {
+        var vm = this
+        var apiUrl = 'http://localhost:8085/testPlanCatalogue/getTestPlanForm'
+        var formData = new window.FormData()
+        formData.append('catalogueId', '4')
+        vm.$http.post(apiUrl, formData).then((response) => {
+          return response.json()
+        }).then((json) => {
+          json.testPlanContext.testPlanContext = JSON.parse(json.testPlanContext.testPlanContext)
+          console.log(json)
+          vm.testPlanForm = json
+          console.log(vm.testPlanForm)
+        })
+      },
       // 更新 testPlanForm
-      updateTestPlanContext () {
+      updateTestPlanForm () {
         var vm = this
         var apiUrl = 'http://localhost:8085/testPlanCatalogue/updateTestPlanForm'
         var formData = new window.FormData()
