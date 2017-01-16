@@ -81,8 +81,8 @@ http://localhost:8080/testPlanCatalogue/deleteTestPlanCatalogue?catalogueId=3
 参数      catalogueId：目录的id
 返回值     0103：删除成功
 
-4. getTestContextPlanForm 查询
-http://localhost:8080/testPlanCatalogue/getTestContextPlanForm?catalogueId=4
+4. getTestPlanForm 查询
+http://localhost:8080/testPlanCatalogue/getTestPlanForm?catalogueId=4
 参数      catalogueId：目录的id
 返回值    json 字符串
 

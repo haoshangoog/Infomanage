@@ -133,7 +133,7 @@ public class TestPlanCatalogueAction extends BaseAction {
         out.print(CommonKey.DELETESUCCESS);
     }
 
-    public void getTestContextPlanForm() throws Exception{
+    public void getTestPlanForm() throws Exception{
         System.out.print("---》getTestContextPlanForm 方法");
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
