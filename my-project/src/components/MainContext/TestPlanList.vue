@@ -8,7 +8,7 @@
         <div class="grid-content bg-purple-light">
           <div v-for="o in testPlanList">
             <el-card class="box-card">
-              <router-link :to="'/testPlanForm'">
+              <router-link :to="'/testPlanForm/'+ o.id">
                 <div class="text item">
                   {{o.planname}}
                 </div>
@@ -57,7 +57,7 @@
         var formData = new window.FormData()
         formData.append('pageNo', gotoPage)
         formData.append('pageSize', vm.page.pageSize)
-        formData.append('deleteflag', '0')
+        formData.append('deleteFlag', '0')
         vm.$http.post(vm.apiUrl, formData).then((response) => {
           return response.json()
         }).then((json) => {

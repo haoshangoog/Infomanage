@@ -1,4 +1,4 @@
-<template >
+<template>
   <div id="testPlanList">
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
@@ -33,7 +33,7 @@
           </el-row>
           <el-row :gutter="20">
             <el-col :span="6">
-              <div class="">*测试项目</div>
+              <div class="">*测试目的</div>
             </el-col>
             <el-col :span="6">
               <div class="">{{testPlanForm.testPlanContext.testPlanContext.testPlanPurpose}}</div>
@@ -97,7 +97,7 @@
               <div class="">目录名称</div>
             </el-col>
             <el-col :span="6">
-              <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanID" placeholder="请输入内容"></el-input>
+              <el-input v-model="testPlanForm.catalogueName" placeholder="请输入内容"></el-input>
             </el-col>
           </el-row>
           <el-row :gutter="20">
@@ -105,11 +105,14 @@
               <div class="">父目录</div>
             </el-col>
             <el-col :span="6">
-              <el-select v-model="value" placeholder="请选择">
+              <el-select v-model="testPlanForm.id" placeholder="请选择">
+                <el-option label="根目录0" value="4"></el-option>
+                <el-option label="根目录1" value="15"></el-option>
+                <el-option label="根目录2" value="18"></el-option>
                 <el-option
-                  v-for="item in options"
-                  :label="item.label"
-                  :value="item.value">
+                  v-for="item in catalogueSelect"
+                  :label="item.catalogueName"
+                  :value="item.id">
                 </el-option>
               </el-select>
             </el-col>
@@ -119,7 +122,7 @@
               <div class="">兄弟级序列</div>
             </el-col>
             <el-col :span="6">
-              <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanID" placeholder="请输入内容"></el-input>
+              <el-input v-model="testPlanForm.sequence" placeholder="请输入兄弟序列"></el-input>
             </el-col>
           </el-row>
           <hr>
@@ -128,7 +131,8 @@
               <div class="">*测试ID</div>
             </el-col>
             <el-col :span="6">
-              <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanID" placeholder="请输入内容"></el-input>
+              <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanID"
+                        placeholder="请输入测试ID"></el-input>
             </el-col>
           </el-row>
           <el-row :gutter="20">
@@ -137,17 +141,19 @@
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testProject" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testProject"
+                          placeholder="请输入测试项目"></el-input>
               </div>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="6">
-              <div class="">*测试项目</div>
+              <div class="">*测试目的</div>
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanPurpose" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testPlanPurpose"
+                          placeholder="请输入测试目的"></el-input>
               </div>
             </el-col>
           </el-row>
@@ -157,7 +163,8 @@
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.requirementID" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.requirementID"
+                          placeholder="请输入需求ID"></el-input>
               </div>
             </el-col>
           </el-row>
@@ -167,7 +174,8 @@
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.topologicalID" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.topologicalID"
+                          placeholder="请输入测试拓扑"></el-input>
               </div>
             </el-col>
           </el-row>
@@ -186,15 +194,15 @@
             <el-row :gutter="20">
               <el-col :span="6">
                 <div class="">
-                  <el-input v-model="o.context" placeholder="请输入内容"></el-input>
+                  <el-input v-model="o.context" placeholder="请输入测试内容"></el-input>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="">
-                  <el-input v-model="o.result" placeholder="请输入内容"></el-input>
+                  <el-input v-model="o.result" placeholder="请输入预期结果"></el-input>
                 </div>
               </el-col>
-              <el-col :span="6">
+              <el-col :span="6" v-show="index">
                 <el-button type="text" icon="delete" v-on:click="deleteTestContextAndResult(index)"></el-button>
               </el-col>
             </el-row>
@@ -205,7 +213,8 @@
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.NorthInterface" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.NorthInterface"
+                          placeholder="请输入北向接口"></el-input>
               </div>
             </el-col>
           </el-row>
@@ -215,13 +224,13 @@
             </el-col>
             <el-col :span="6">
               <div class="">
-                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testSample" placeholder="请输入内容"></el-input>
+                <el-input v-model="testPlanForm.testPlanContext.testPlanContext.testSample"
+                          placeholder="请输入测试样例"></el-input>
               </div>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-button v-on:click="updateTestPlanForm">确认提交</el-button>
-            <el-button v-on:click="getTestPlanForm">获取</el-button>
           </el-row>
         </div>
       </el-col>
@@ -235,9 +244,9 @@
       return {
         editTestPlan: false,
         testPlanForm: {
-          'id': 4,
+          'id': 15,
           'catalogueName': '目录5',
-          'parentsId': 1,
+          'parentsId': 4,
           'sequence': 2,
           'testPlanId': 1,
           'testPlanContextId': 3,
@@ -265,15 +274,25 @@
           children: 'children',
           label: 'catalogueName'
         },
-        catalogueName: ''
+        catalogueName: '',
+        catalogueSelect1: {
+          'options': [],
+          value: '1'
+        }
+      }
+    },
+    computed: {
+      catalogueSelect () {
+        var vm = this
+        return vm.jsonTree(vm.allCatalogue, vm.testPlanForm.id)
       }
     },
     mounted () {
-      this.getTestPlanPageCatalogue(1)
+      this.getTestPlanPageCatalogue(this.$route.params.testPlanID)
     },
     methods: {
       handleNodeClick (data) {
-        console.log(data)
+        this.getTestPlanForm(data.id)
       },
       // 目录部分 Start
       getTestPlanPageCatalogue (testPlanId) {
@@ -285,7 +304,6 @@
           return response.json()
         }).then((json) => {
           vm.allCatalogue = json
-          console.log(vm.allCatalogue)
         })
       },
       // 目录部分 END
@@ -301,18 +319,32 @@
         vm.testPlanForm.testPlanContext.testPlanContext.testContextAndResult.splice(index, 1)
       },
       // 获取 testPlanForm
-      getTestPlanForm () {
+      getTestPlanForm (catalogueID) {
         var vm = this
         var apiUrl = 'http://localhost:8085/testPlanCatalogue/getTestPlanForm'
         var formData = new window.FormData()
-        formData.append('catalogueId', '4')
+        formData.append('catalogueId', catalogueID)
         vm.$http.post(apiUrl, formData).then((response) => {
           return response.json()
         }).then((json) => {
-          json.testPlanContext.testPlanContext = JSON.parse(json.testPlanContext.testPlanContext)
-          console.log(json)
+          var testPlanContext = json.testPlanContext.testPlanContext
+          if (testPlanContext) {
+            json.testPlanContext.testPlanContext = JSON.parse(testPlanContext)
+          } else {
+            json.testPlanContext.testPlanContext = {
+              'testPlanID': '',
+              'testProject': '',
+              'testPlanPurpose': '',
+              'requirementID': '',
+              'topologicalID': '',
+              'testContextAndResult': [
+                {'context': '', 'result': ''}
+              ],
+              'NorthInterface': '',
+              'testSample': ''
+            }
+          }
           vm.testPlanForm = json
-          console.log(vm.testPlanForm)
         })
       },
       // 更新 testPlanForm
@@ -320,13 +352,37 @@
         var vm = this
         var apiUrl = 'http://localhost:8085/testPlanCatalogue/updateTestPlanForm'
         var formData = new window.FormData()
-        vm.testPlanForm.testPlanContext.testPlanContext = JSON.stringify(vm.testPlanForm.testPlanContext.testPlanContext)
+        var testPlanContext = vm.testPlanForm.testPlanContext.testPlanContext
+        vm.testPlanForm.testPlanContext.testPlanContext =
+          (typeof testPlanContext === 'object') === true ? JSON.stringify(testPlanContext) : testPlanContext
         formData.append('testPlanForm', JSON.stringify(vm.testPlanForm))
         vm.$http.post(apiUrl, formData).then((response) => {
           console.log(response)
         })
-      }
+      },
       // 内容部分 END
+      jsonTree (jsonTree, value) {
+        var array = []
+        if ((typeof jsonTree === 'object') && (jsonTree.constructor === Object.prototype.constructor)) {
+          array.push(jsonTree)
+        } else {
+          array = jsonTree
+        }
+        var result = []
+        for (var i = 0; i < array.length; i++) {
+          var jn = array[i]
+          if (jn.id === Number(value)) {
+            result = jn.children
+            return result
+          } else if (jn.children && jn.children.length > 0) {
+            result = this.jsonTree(jn.children, value)
+          }
+          if (result.length !== 0) {
+            return result
+          }
+        }
+        return result
+      }
     }
   }
 </script>

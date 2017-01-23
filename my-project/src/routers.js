@@ -14,7 +14,7 @@ export default [
         component: TestPlanList
       },
       {
-        path: '/TestPlanForm',
+        path: '/TestPlanForm/:testPlanID',
         component: TestPlanForm
       },
       {
