@@ -58,7 +58,7 @@
 
 <script type="text/javascript">
 
-    pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteflag=0');
+    pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteFlag=0');
 
     function gotoContext(id) {
         localStorage['testPlanId'] = id;

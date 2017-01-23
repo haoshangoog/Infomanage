@@ -23,7 +23,7 @@ $.ajax({
 
 $.ajax({
     type: "post",
-    data: {"parentsCatalogueId":FRISTCATALOGUEID,"deleteflag":0},
+    data: {"parentsCatalogueId":FRISTCATALOGUEID,"deleteFlag":0},
     url: "/testPlanCatalogue/selectChildCatalogue",
     async: false,
     dataType: 'json',
@@ -72,7 +72,7 @@ function showChild(obj){
     var middel = "";
     $.ajax({
         type: "post",
-        data: {"parentsCatalogueId":parentsId,"deleteflag":0},
+        data: {"parentsCatalogueId":parentsId,"deleteFlag":0},
         url: "/testPlanCatalogue/selectChildCatalogue",
         async: false,
         dataType: 'json',

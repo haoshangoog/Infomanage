@@ -22,9 +22,9 @@ function UserModalClear() {
     $("#realName_modal").val("");
     $("#realName_modal").attr("disabled", "disabled");
 
-    $("#deleteflag_modal_div").hide();
-    $("#deleteflag_modal").val("");
-    $("#deleteflag_modal").attr("disabled", "disabled");
+    $("#deleteFlag_modal_div").hide();
+    $("#deleteFlag_modal").val("");
+    $("#deleteFlag_modal").attr("disabled", "disabled");
 
     $("#createUserBtn").hide();
     $("#updateUserBtn").hide();
@@ -96,7 +96,7 @@ function showUser(id) {
     $("#identity_modal_div").show();
     $("#password_modal_div").show();
     $("#realName_modal_div").show();
-    $("#deleteflag_modal_div").show();
+    $("#deleteFlag_modal_div").show();
 
     $.ajax({
         type: "post",
@@ -113,7 +113,7 @@ function showUser(id) {
             $("#identity_modal").val(msg.identity);
             $("#password_modal").val(msg.password);
             $("#realName_modal").val(msg.realName);
-            $("#deleteflag_modal").val(msg.deleteFlag);
+            $("#deleteFlag_modal").val(msg.deleteFlag);
         }
     });
 
@@ -130,7 +130,7 @@ function showEditUser() {
     $("#identity_modal").removeAttr("disabled");
     $("#password_modal").removeAttr("disabled");
     $("#realName_modal").removeAttr("disabled");
-    $("#deleteflag_modal").removeAttr("disabled");
+    $("#deleteFlag_modal").removeAttr("disabled");
 
     $("#updateUserBtn").show();
 
@@ -142,7 +142,7 @@ function updateUser() {
     var identity = $("#identity_modal").val();
     var password = $("#password_modal").val();
     var realName = $("#realName_modal").val();
-    var deleteFlag = $("#deleteflag_modal").val();
+    var deleteFlag = $("#deleteFlag_modal").val();
 
     $.ajax({
         type: "post",

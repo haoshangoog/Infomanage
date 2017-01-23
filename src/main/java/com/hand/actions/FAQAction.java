@@ -129,7 +129,7 @@ public class FAQAction extends BaseAction {
         // 测试方案 的分页查询
         String pageNo   = request.getParameter("pageNo");
         String pageSize = request.getParameter("pageSize");
-        String deleteflag = request.getParameter("deleteflag");
+        String deleteFlag = request.getParameter("deleteFlag");
 
         if(pageNo==null || pageSize == null){
             System.out.println("由于参数导致创建失败--pageNo / pageSize 缺失");
@@ -138,8 +138,8 @@ public class FAQAction extends BaseAction {
         }
 
         Criterion criterion = null;
-        if(deleteflag!=null){
-            criterion =  Restrictions.eq("deleteFlag",Integer.parseInt(deleteflag));
+        if(deleteFlag!=null){
+            criterion =  Restrictions.eq("deleteFlag",Integer.parseInt(deleteFlag));
         }else{
             criterion =  Restrictions.eq("deleteFlag",0);
         }

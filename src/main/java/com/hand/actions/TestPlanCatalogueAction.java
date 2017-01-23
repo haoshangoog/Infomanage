@@ -162,15 +162,15 @@ public class TestPlanCatalogueAction extends BaseAction {
 
         System.out.println("---》selectChildCatalogue 方法");
         String parentsCatalogueId   = request.getParameter("parentsCatalogueId");
-        String deleteflag   = request.getParameter("deleteflag");
+        String deleteFlag   = request.getParameter("deleteFlag");
         String sql ="";
-        if(deleteflag ==null){
+        if(deleteFlag ==null){
             sql ="SELECT * FROM testPlanCatalogue " +
                     "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag=0" +
                     " order by sequence";
         }else {
             sql ="SELECT * FROM testPlanCatalogue " +
-                    "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag="+Integer.parseInt(deleteflag)+
+                    "where parentsId = "+Integer.parseInt(parentsCatalogueId)+" and deleteflag="+Integer.parseInt(deleteFlag)+
                     " order by sequence";
         }
         System.out.println("selectChildCatalogue SQL 查询语句："+sql);

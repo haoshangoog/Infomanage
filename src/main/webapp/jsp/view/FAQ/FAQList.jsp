@@ -103,7 +103,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    pagingStart('#FAQPaging', '#FAQPaging_Model', '/FAQ/pageingFAQ?pageSize=5&deleteflag=0');
+    pagingStart('#FAQPaging', '#FAQPaging_Model', '/FAQ/pageingFAQ?pageSize=5&deleteFlag=0');
 </script>
 </body>
 

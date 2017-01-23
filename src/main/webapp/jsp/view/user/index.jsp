@@ -35,8 +35,8 @@
 
 </div>
 <script type="text/javascript">
-    pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteflag=0', false);
-    pagingStart('#FAQPaging', '#FAQPaging_Model', '/FAQ/pageingFAQ?pageSize=5&deleteflag=0', false);
+    pagingStart('#testPlanPaging', '#testPlanPaging_Model', '/testPlan/pageingTestPlan?pageSize=5&deleteFlag=0', false);
+    pagingStart('#FAQPaging', '#FAQPaging_Model', '/FAQ/pageingFAQ?pageSize=5&deleteFlag=0', false);
     function gotoContext(id) {
         localStorage['testPlanId'] = id;
         window.location.href = "/jsp/view/testplan/testplanFrom.jsp";

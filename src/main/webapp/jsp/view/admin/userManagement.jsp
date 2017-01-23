@@ -93,9 +93,9 @@
 					<label for="identity_modal">真实名称：</label>
 					<input type="text" class="form-control" id="realName_modal" placeholder="请输入真是名称">
 				</div>
-				<div class="form-group" id="deleteflag_modal_div">
-					<label for="deleteflag_modal">状态：</label>
-					<select class="form-control" id="deleteflag_modal">
+				<div class="form-group" id="deleteFlag_modal_div">
+					<label for="deleteFlag_modal">状态：</label>
+					<select class="form-control" id="deleteFlag_modal">
 						<option value ="0">正在使用</option>
 						<option value ="1">禁用</option>
 					</select>
