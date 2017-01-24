@@ -102,18 +102,19 @@
           </el-row>
           <el-row :gutter="20">
             <el-col :span="6">
-              <div class="">父目录</div>
+              <div class="">父级目录</div>
             </el-col>
             <el-col :span="6">
-              <el-select v-model="testPlanForm.id" placeholder="请选择">
-                <el-option label="根目录0" value="4"></el-option>
-                <el-option label="根目录1" value="15"></el-option>
-                <el-option label="根目录2" value="18"></el-option>
-                <el-option
-                  v-for="item in catalogueSelect"
-                  :label="item.catalogueName"
-                  :value="item.id">
-                </el-option>
+              <el-select v-model="testPlanForm.parentsId" placeholder="请选择">
+                <el-option-group
+                  v-for="group in catalogueSelect"
+                  :label="group.label">
+                  <el-option
+                    v-for="item in group.options"
+                    :label="item.catalogueName"
+                    :value="item.id">
+                  </el-option>
+                </el-option-group>
               </el-select>
             </el-col>
           </el-row>
@@ -273,18 +274,14 @@
         defaultProps: {
           children: 'children',
           label: 'catalogueName'
-        },
-        catalogueName: '',
-        catalogueSelect1: {
-          'options': [],
-          value: '1'
         }
       }
     },
     computed: {
       catalogueSelect () {
+        // 父级目录可选择的有1. 根目录 2. 当前目录 3. 子目录
         var vm = this
-        return vm.jsonTree(vm.allCatalogue, vm.testPlanForm.id)
+        return vm.jsonTree(vm.allCatalogue, vm.testPlanForm.parentsId)
       }
     },
     mounted () {
@@ -361,21 +358,35 @@
         })
       },
       // 内容部分 END
-      jsonTree (jsonTree, value) {
+      jsonTree (jsonTree, value, root) {
+        if (jsonTree.length === 0) {
+          return
+        }
         var array = []
         if ((typeof jsonTree === 'object') && (jsonTree.constructor === Object.prototype.constructor)) {
           array.push(jsonTree)
         } else {
           array = jsonTree
         }
+        if (!root) {
+          root = array[0].parentsId
+          if (Number(value) === root) {
+            var s = []
+            s.push({label: '根目录', options: [{'catalogueName': '根目录', 'id': root}]})
+            s.push({label: '子目录', options: array})
+            return s
+          }
+        }
         var result = []
         for (var i = 0; i < array.length; i++) {
           var jn = array[i]
           if (jn.id === Number(value)) {
-            result = jn.children
+            result.push({label: '根目录', options: [{'catalogueName': '根目录', 'id': root}]})
+            result.push({label: '当前目录', options: [{'catalogueName': jn.catalogueName, 'id': jn.id}]})
+            result.push({label: '子目录', options: jn.children})
             return result
           } else if (jn.children && jn.children.length > 0) {
-            result = this.jsonTree(jn.children, value)
+            result = this.jsonTree(jn.children, value, root)
           }
           if (result.length !== 0) {
             return result
