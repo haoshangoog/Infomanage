@@ -2,6 +2,7 @@
   <div id="testPlanList">
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
+        <el-button v-on:click="addCatalogue" v-show="editTestPlan">添加目录</el-button>
         <div class="grid-content bg-purple-light">
           <el-tree :data="allCatalogue" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
           <label>编辑测试方案</label>
@@ -243,27 +244,25 @@
   export default {
     data () {
       return {
+        textPlanId: 0,
         editTestPlan: false,
         testPlanForm: {
-          'id': 15,
-          'catalogueName': '目录5',
-          'parentsId': 4,
-          'sequence': 2,
-          'testPlanId': 1,
-          'testPlanContextId': 3,
+          'id': 0,
+          'catalogueName': '',
+          'parentsId': 0,
+          'sequence': 0,
+          'testPlanId': 0,
+          'testPlanContextId': 0,
           'deleteFlag': 0,
           'testPlanContext': {
             'testPlanContext': {
-              'testPlanID': '1',
+              'testPlanID': 0,
               'testProject': 'testProject',
               'testPlanPurpose': 'testPlanPurpose',
               'requirementID': 'requirementID',
               'topologicalID': 'topologicalID',
               'testContextAndResult': [
-                {'context': 'AAA', 'result': 'aaa'},
-                {'context': 'AAA', 'result': 'aaa'},
-                {'context': 'AAA', 'result': 'aaa'},
-                {'context': 'AAA', 'result': 'aaa'}
+                {'context': '内容..', 'result': '结果'}
               ],
               'NorthInterface': 'North-Interface',
               'testSample': 'Test sample'
@@ -285,11 +284,37 @@
       }
     },
     mounted () {
-      this.getTestPlanPageCatalogue(this.$route.params.testPlanID)
+      this.testPlanId = this.$route.params.testPlanID
+      this.getTestPlanPageCatalogue(this.testPlanId)
     },
     methods: {
       handleNodeClick (data) {
         this.getTestPlanForm(data.id)
+      },
+      addCatalogue () {
+        this.testPlanForm = {
+          'id': 0,
+          'catalogueName': '',
+          'parentsId': 0,
+          'sequence': 0,
+          'testPlanId': this.testPlanId,
+          'testPlanContextId': 0,
+          'deleteFlag': 0,
+          'testPlanContext': {
+            'testPlanContext': {
+              'testPlanID': this.testPlanId,
+              'testProject': 'testProject',
+              'testPlanPurpose': 'testPlanPurpose',
+              'requirementID': 'requirementID',
+              'topologicalID': 'topologicalID',
+              'testContextAndResult': [
+                {'context': '内容..', 'result': '结果'}
+              ],
+              'NorthInterface': 'North-Interface',
+              'testSample': 'Test sample'
+            }
+          }
+        }
       },
       // 目录部分 Start
       getTestPlanPageCatalogue (testPlanId) {
@@ -370,8 +395,9 @@
         }
         if (!root) {
           root = array[0].parentsId
-          if (Number(value) === root) {
+          if (Number(value) === root || Number(value) === 0) {
             var s = []
+            this.testPlanForm.parentsId = root
             s.push({label: '根目录', options: [{'catalogueName': '根目录', 'id': root}]})
             s.push({label: '子目录', options: array})
             return s
