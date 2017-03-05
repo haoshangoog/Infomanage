@@ -1,8 +1,10 @@
-<template xmlns:v-on="http://www.w3.org/1999/xhtml">
+<template>
   <div id="testPlanList">
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
-        <div class="grid-content bg-purple-light"></div>
+        <div class="grid-content bg-purple-light">
+          <el-button type="text" @click="addTestPlan">添加测试方案</el-button>
+        </div>
       </el-col>
       <el-col :xs="8" :sm="12" :md="16" :lg="18">
         <div class="grid-content bg-purple-light">
@@ -13,6 +15,8 @@
                   {{o.planname}}
                 </div>
               </router-link>
+              <el-button type="text" @click="editTestPlan(o.id)">编辑</el-button>
+              <el-button type="text" @click="deleteTestPlan(o.id)">删除</el-button>
             </el-card>
           </div>
           <div class="block">
@@ -49,6 +53,113 @@
       this.getTestPlanPageList(1)
     },
     methods: {
+      addTestPlan () {
+        this.$prompt('请输入测试方案名:', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+//          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '测试方案名格式不正确'
+        }).then(({value}) => {
+          this.addTestPlanReq(value)
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          })
+        })
+      },
+      addTestPlanReq (planName) {
+        var vm = this
+        var formData = new window.FormData()
+        formData.append('planName', planName)
+        vm.$http.post('http://localhost:8085/testPlan/createTestPlan', formData).then((response) => {
+          console.log(response.body)
+          if (response.body === '0101') {
+            this.$message({
+              type: 'success',
+              message: '创建成功'
+            })
+          } else {
+            this.$message({
+              type: 'info',
+              message: '创建失败'
+            })
+          }
+        })
+      },
+      editTestPlan (id) {
+        console.log('编辑测试方案的ID是: ' + id)
+        this.$prompt('请输入测试方案名:', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+//          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '测试方案名格式不正确'
+        }).then(({value}) => {
+          this.editTestPlanReq(id, value)
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          })
+        })
+      },
+      editTestPlanReq (id, planName) {
+        var vm = this
+        var formData = new window.FormData()
+        formData.append('planNameId', id)
+        formData.append('planName', planName)
+        vm.$http.post('http://localhost:8085/testPlan/updateTestPlan', formData).then((response) => {
+          console.log(response.body)
+          if (response.body === '0105') {
+            this.$message({
+              type: 'success',
+              message: '更新成功'
+            })
+          } else {
+            this.$message({
+              type: 'info',
+              message: '更新失败'
+            })
+          }
+        })
+      },
+      deleteTestPlan (id) {
+        this.$confirm('此操作将删除该测试方案, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteTestPlanReq(id)
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
+      deleteTestPlanReq (id) {
+        var vm = this
+        var formData = new window.FormData()
+        formData.append('planNameId', id)
+        vm.$http.post('http://localhost:8085/testPlan/deleteTestPlan', formData).then((response) => {
+          console.log(response.body)
+          if (response.body === '0103') {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+          } else {
+            this.$message({
+              type: 'info',
+              message: '删除失败'
+            })
+          }
+        })
+      },
       handleCurrentChange (gotoPage) {
         this.getTestPlanPageList(gotoPage)
       },
