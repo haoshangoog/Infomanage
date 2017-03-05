@@ -17,8 +17,8 @@ public class TestPlanCatalogueService implements ITestPlanCatalogueService {
     private ITestPlanCatalogueDao testPlanCatalogueDao;
 
     @Override
-    public void createTestPlanCatalogue(TestPlanCatalogue testPlanCatalogue) throws Exception {
-        testPlanCatalogueDao.Create(testPlanCatalogue);
+    public int createTestPlanCatalogue(TestPlanCatalogue testPlanCatalogue) throws Exception {
+        return (int)testPlanCatalogueDao.Create(testPlanCatalogue);
     }
 
     @Override

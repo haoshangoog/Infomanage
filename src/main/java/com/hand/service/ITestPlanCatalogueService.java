@@ -11,7 +11,7 @@ public interface ITestPlanCatalogueService {
     /*
     *	创建测试方案目录
      */
-    public void createTestPlanCatalogue(TestPlanCatalogue testPlanCatalogue) throws Exception;
+    public int createTestPlanCatalogue(TestPlanCatalogue testPlanCatalogue) throws Exception;
 
     /*
     *	删除测试方案目录
