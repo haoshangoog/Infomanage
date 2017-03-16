@@ -19,7 +19,7 @@ public class PagingService<T extends Serializable> {
     private PagingDao<T> pagingDao;
 
     public void PagingService (Class<T> tClass ){
-        this.tClass = tClass;
+        //this.tClass = tClass;
         pagingDao.setClazz(tClass);
     }
     /**

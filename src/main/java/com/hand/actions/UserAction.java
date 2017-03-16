@@ -44,7 +44,7 @@ public class UserAction extends BaseAction {
         }
         // 校验用户名是否重复
         String sql = "SELECT * FROM user WHERE accountName='"+accountName+"';";
-        List<User> userList = new ArrayList<>();
+        List<User> userList = null;
         try {
             userList = userService.FindBySQL(sql);
         } catch (Exception e) {
@@ -173,7 +173,7 @@ public class UserAction extends BaseAction {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out    = response.getWriter();
         String userId = request.getParameter("userId");
-        if(userId == null ||userId == ""){
+        if(null == userId || "".equals(userId)){
             System.out.print("用户 ID 不正确");
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
@@ -207,7 +207,7 @@ public class UserAction extends BaseAction {
             return;
         }
         String sql = "SELECT * FROM user WHERE accountName='"+accountName+"' AND password = '"+password+"';";
-        List<User> userList = new ArrayList<>();
+        List<User> userList = null;
         try {
             userList = userService.FindBySQL(sql);
         } catch (Exception e) {

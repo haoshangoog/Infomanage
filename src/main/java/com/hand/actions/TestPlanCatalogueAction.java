@@ -79,12 +79,14 @@ public class TestPlanCatalogueAction extends BaseAction {
         String testPlanForm =request.getParameter("testPlanForm");
         Gson gson = new Gson();
         TestPlanCatalogue testPlanCatalogue = gson.fromJson(testPlanForm,TestPlanCatalogue.class);
-
-        TestPlanCatalogue testPlanCatalogue2 = testPlanCatalogueService.FindByID(testPlanCatalogue.getId());
-        if(testPlanCatalogue ==null){
+        if(null == testPlanCatalogue){
             System.out.println("更新的目录不存在");
             return;
         }
+
+        TestPlanCatalogue testPlanCatalogue2 =
+                testPlanCatalogueService.FindByID(testPlanCatalogue.getId());
+
         TestPlanContext testPlanContext = testPlanContextService.FindByID(testPlanCatalogue2.getTestPlanContextId());
         testPlanContext.setTestPlanContext(testPlanCatalogue.getTestPlanContext().getTestPlanContext());
         testPlanContextService.updateTestPlanContext(testPlanContext);
