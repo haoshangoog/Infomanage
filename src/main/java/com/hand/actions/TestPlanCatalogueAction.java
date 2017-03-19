@@ -24,6 +24,52 @@ public class TestPlanCatalogueAction extends BaseAction {
     @Resource(name = "pagingService")
     private PagingService<TestPlanCatalogue> pagingTestPlanCatalogueService;
 
+    public void createTestPlanCatalogue() throws Exception {
+        TestPlanCatalogue testPlanCatalogue = new TestPlanCatalogue();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        System.out.println("---》createTestPlanCatalogue 方法");
+        //  获取参数并进行校验
+        String catalogueName = request.getParameter("catalogueName");
+        String parentsId     = request.getParameter("parentsId");
+        String sequence      = request.getParameter("sequence");
+        String textPlanContext = request.getParameter("textPlanContext");
+
+        if (catalogueName == null ||parentsId == null || sequence == null)
+        {
+            System.out.println("由于参数导致创建失败--catalogueName/parentsId/sequence 没有写");
+            out.print(CommonKey.PARAMETERDEFICIENCY);
+            return;
+        }
+        TestPlanCatalogue testPlanCatalogueParents = testPlanCatalogueService.FindByID(Integer.parseInt(parentsId));
+        if(testPlanCatalogueParents==null){
+            System.out.println("创建子目录时找不到父目录");
+            out.print(CommonKey.CREATFAIL);
+            return;
+        }
+        testPlanCatalogue.setCatalogueName(catalogueName);
+        testPlanCatalogue.setTestPlanId(testPlanCatalogueParents.getTestPlanId());
+        testPlanCatalogue.setParentsId(Integer.parseInt(parentsId));
+        testPlanCatalogue.setSequence(Integer.parseInt(sequence));
+        // 创建内容页
+        TestPlanContext testPlanContext = new TestPlanContext();
+        testPlanContext.setTestPlanContext(textPlanContext);
+        testPlanCatalogue.setTestPlanContextId(testPlanContextService.createTestPlanContext(testPlanContext));
+
+        try {
+            testPlanCatalogueService.createTestPlanCatalogue(testPlanCatalogue);
+        } catch (Exception e) {
+            System.out.println("深层调用导致创建失败");
+            out.print(CommonKey.ACCOUNTNAMEDUPLICATE);
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("创建成功");
+        out.print(CommonKey.CREATESUCCESS);
+    }
+
     public void updateTestPlanForm() throws Exception {
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
@@ -33,20 +79,14 @@ public class TestPlanCatalogueAction extends BaseAction {
         String testPlanForm =request.getParameter("testPlanForm");
         Gson gson = new Gson();
         TestPlanCatalogue testPlanCatalogue = gson.fromJson(testPlanForm,TestPlanCatalogue.class);
-
-        TestPlanCatalogue testPlanCatalogue2 = null;
-        if(testPlanCatalogue.getId() == 0){
-            int testPlanContext_id = testPlanContextService.createTestPlanContext(new TestPlanContext());
-            testPlanCatalogue.setTestPlanContextId(testPlanContext_id);
-            int testPlanCatalogue_id = testPlanCatalogueService.createTestPlanCatalogue(testPlanCatalogue);
-            testPlanCatalogue2 = testPlanCatalogueService.FindByID(testPlanCatalogue_id);
-        }else{
-            testPlanCatalogue2 = testPlanCatalogueService.FindByID(testPlanCatalogue.getId());
-        }
-        if(testPlanCatalogue ==null){
+        if(null == testPlanCatalogue){
             System.out.println("更新的目录不存在");
             return;
         }
+
+        TestPlanCatalogue testPlanCatalogue2 =
+                testPlanCatalogueService.FindByID(testPlanCatalogue.getId());
+
         TestPlanContext testPlanContext = testPlanContextService.FindByID(testPlanCatalogue2.getTestPlanContextId());
         testPlanContext.setTestPlanContext(testPlanCatalogue.getTestPlanContext().getTestPlanContext());
         testPlanContextService.updateTestPlanContext(testPlanContext);
