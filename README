@@ -20,7 +20,7 @@ http://localhost:8080/user/deleteUser?id=1
 4. login
 http://localhost:8080/user/login?accountName=yang&password=yangyi
 参数       accountName：用户名       password：密码
-返回值     1103：登陆成功   1104：登陆失败
+返回值     返回json:登陆成功   1104：登陆失败
 
 5. logout
 http://localhost:8080/user/logout

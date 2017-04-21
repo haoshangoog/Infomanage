@@ -219,7 +219,9 @@ public class UserAction extends BaseAction {
         if(userList.size() == 1){
             System.out.println("登陆成功");
             session.put("user",userList.get(0));
-            out.print(CommonKey.LOGINSUCCESS); // 登陆成功
+//            out.print(CommonKey.LOGINSUCCESS); // 登陆成功
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            out.print(gson.toJson((User)session.get("user")));
         }else {
             System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");
             out.print(CommonKey.LOGINFAIL); // 登陆失败
