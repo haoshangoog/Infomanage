@@ -27,7 +27,7 @@ http://localhost:8080/user/logout
 返回值     1105：退出登陆成功
 
 6.pageingUser
-http://localhost:8080/user/pageingUser?PageNo=1&identity=1
+http://localhost:8080/user/pageingUser?pageNo=1&identity=1
 参数       PageNo: 分页码     identity：用户身份 1或者是2
 返回值     {"pageSize":5,"pageNo":1,"rowCount":1,"result":[{"id":1,"accountName":"yang0","realName":"yangyi0","password":"0","identity":1,"deleteFlag":1}]}
 
