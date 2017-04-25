@@ -25,6 +25,17 @@ const router = new VueRouter({routes})
 var VueResource = require('vue-resource')
 Vue.use(VueResource)
 /* 导入Ajax/Date END */
+Vue.http.interceptors.push(function (request, next) {
+  // modify request
+  request.credentials = true
+  request['url'] = 'http://localhost:8085' + request.url
+  // request.headers.set('X-CSRF-TOKEN', 'TOKEN')
+
+  // continue to next interceptor
+  next(function (response) {
+    // modify response
+  })
+})
 
 import App from './App'
 import store from './store'
