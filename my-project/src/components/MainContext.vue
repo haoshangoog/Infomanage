@@ -31,3 +31,8 @@
     ])
   }
 </script>
+<style>
+  body{
+    color: #48576a;
+  }
+</style>
