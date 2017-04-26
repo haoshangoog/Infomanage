@@ -3,7 +3,7 @@
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
         <el-menu mode="vertical" default-active="1" class="">
-          <el-menu-item index="1">
+          <el-menu-item index="1" v-show="role != 'GUEST'">
             编辑测试方案
             <el-switch
               v-model="editTestPlan"
@@ -22,7 +22,7 @@
       <el-col :xs="8" :sm="12" :md="16" :lg="18">
         <el-card class="box-card">
           <!-- Show -->
-          <div class="grid-content bg-purple-light show" v-show="!editTestPlan">
+          <div class="grid-content show" v-show="!editTestPlan">
             <el-row :gutter="20">
               <el-col :xs="6" :sm="6" :md="6" :lg="6">
                 <div class="">*测试ID</div>
@@ -99,7 +99,7 @@
             </el-row>
           </div>
           <!-- EDIT -->
-          <div class="grid-content bg-purple-light " v-show="editTestPlan">
+          <div class="grid-content " v-show="editTestPlan">
             <el-row :gutter="20">
               <el-col :xs="6" :sm="6" :md="6" :lg="6">
                 <div class="">目录名称</div>
@@ -254,6 +254,7 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
   export default {
     data () {
       return {
@@ -290,12 +291,14 @@
       }
     },
     computed: {
+      ...mapGetters(['role']),
       catalogueSelect () {
         // 父级目录可选择的有1. 根目录 2. 当前目录 3. 子目录
         var vm = this
         return vm.jsonTree(vm.allCatalogue, vm.testPlanForm.parentsId)
       }
     },
+
     mounted () {
       this.testPlanId = this.$route.params.testPlanID
       this.getTestPlanPageCatalogue(this.testPlanId)
