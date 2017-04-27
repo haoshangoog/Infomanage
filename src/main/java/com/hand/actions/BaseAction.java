@@ -9,7 +9,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class BaseAction extends ActionSupport implements SessionAware,ServletRequestAware, ServletResponseAware {
+public class BaseAction extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
 	public Map session;
 	public HttpServletRequest request;
 	public HttpServletResponse response;
@@ -17,10 +17,11 @@ public class BaseAction extends ActionSupport implements SessionAware,ServletReq
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
-		this.response.setHeader("Access-Control-Allow-Origin", "*");
+		this.response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 		this.response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		this.response.setHeader("Access-Control-Max-Age", "3600");
-		this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		this.response.setHeader("Access-Control-Allow-Headers", "Date, Set-Cookie, X-CSRF-TOKEN, Origin, X-Requested-With, Content-Type, Accept");
+		this.response.setHeader("Access-Control-Expose-Headers", "Set-Cookie, Date, Access-Control-Allow-Methods");
 		this.response.setHeader("Access-Control-Allow-Credentials","true");
 	}
 

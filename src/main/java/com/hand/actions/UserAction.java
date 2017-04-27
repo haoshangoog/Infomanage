@@ -12,7 +12,6 @@ import org.hibernate.criterion.Restrictions;
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.hand.commonKey.CommonKey.PAGESIZE;
