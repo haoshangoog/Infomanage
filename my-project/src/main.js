@@ -37,6 +37,9 @@ Vue.http.interceptors.push(function (request, next) {
   })
 })
 
+import VueClip from 'vue-clip'
+Vue.use(VueClip)
+
 import App from './App'
 import store from './store'
 
