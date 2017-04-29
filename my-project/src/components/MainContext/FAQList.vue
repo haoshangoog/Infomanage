@@ -1,5 +1,5 @@
 <template>
-  <div id="FAQList">
+  <div>
     <el-row :gutter="10">
       <el-col :xs="8" :sm="6" :md="4" :lg="3">
         <el-menu mode="vertical" default-active="1" class="">
@@ -45,6 +45,7 @@
   export default{
     data () {
       return {
+        FAQList: {},
         apiUrl: '/FAQ/pageingFAQ',
         List: {},
         page: {
