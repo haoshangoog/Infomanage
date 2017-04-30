@@ -3,12 +3,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 1. createUser
-http://localhost:8080/user/createUser?accountName=yang&realName=yangyi&password=yangyi&identity=1
-参数        accountName：用户名 realName：真实名字   password：密码     identity：1 普通用户 2 管理员
+http://localhost:8080/user/createUser?accountName=yang&password=yangyi&identity=1
+参数        accountName：用户名  password：密码     identity：1 普通用户 2 管理员
 返回值      0101：创建成功
 
 2. updateUser
-http://localhost:8080/user/updateUser?id=1&accountName=yang0&realName=yangyi0&identity=2&password=0
+http://localhost:8080/user/updateUser?id=1&accountName=yang0&realName=yangyi0&identity=2&password=0&deleteFlag=1
 参数       id:用户ID   accountName：用户名   realName：真实名字   password：密码     identity：1 普通用户 2 管理员
 返回值      0105：更新成功
 
@@ -119,3 +119,8 @@ http://localhost:8080/FAQ/deleteFAQ?faqId=1
 http://localhost:8080/FAQ/pageingFAQ?pageNo=1&pageSize=5&deleteFlag=0
 参数      pageNo：当前页      pageSize：每页的条数      deleteFlag：选择删除的测试方案还是未删除的（不写代表是没有删除的）
 返回值    json 字符串
+
+5.selectFAQById
+http://localhost:8080/FAQ/selectFAQById?FAQID=1
+参数       FAQID: FAQID
+返回值： json

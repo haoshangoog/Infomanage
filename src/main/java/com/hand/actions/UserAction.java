@@ -32,7 +32,7 @@ public class UserAction extends BaseAction {
 
         System.out.println("---》createUser 方法");
         String accountName = request.getParameter("accountName");
-        String realName    = request.getParameter("realName");
+//        String realName    = request.getParameter("realName");
         String password    = request.getParameter("password");
         String identity    = request.getParameter("identity");
         if (accountName == null|| password == null)
@@ -59,7 +59,7 @@ public class UserAction extends BaseAction {
         }
 
         user.setAccountName(accountName);
-        user.setRealName(realName);
+//        user.setRealName(realName);
         user.setPassword(password);
         if(Integer.parseInt(identity)==CommonKey.USER || Integer.parseInt(identity) == CommonKey.ADMIN){
             user.setIdentity(Integer.parseInt(identity));
@@ -82,7 +82,7 @@ public class UserAction extends BaseAction {
 
     public void updateUser() throws Exception {
         System.out.print("---》updateUser 方法");
-        User user = new User();
+        User user = null;
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
@@ -93,16 +93,20 @@ public class UserAction extends BaseAction {
             System.out.print("没有userID 无法进行更新");
             out.print(CommonKey.UPDATEFAIL);
             return;
+        }else{
+            user = userService.FindByID(Integer.parseInt(id));
         }
         String accountName = request.getParameter("accountName");
         String realName = request.getParameter("realName");
         String password = request.getParameter("password");
         String identity = request.getParameter("identity");
-        user.setId(Integer.parseInt(id));
+        String deleteFlag = request.getParameter("deleteFlag");
+
         if(accountName  !=null)user.setAccountName(accountName);
         if(realName     !=null)user.setRealName(realName);
         if(password     !=null)user.setPassword(password);
         if(identity     !=null)user.setIdentity(Integer.parseInt(identity));
+        if(deleteFlag   !=null)user.setDeleteFlag(Integer.parseInt(deleteFlag));
 
         try {
             userService.updateUser(user);

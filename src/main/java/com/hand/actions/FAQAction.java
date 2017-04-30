@@ -31,8 +31,7 @@ public class FAQAction extends BaseAction {
         String question = request.getParameter("question");
         String answer   = request.getParameter("answer");
 
-        if (question == null)
-        {
+        if (question == null) {
             System.out.println("由于参数导致创建失败--question 没有写");
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
@@ -63,19 +62,18 @@ public class FAQAction extends BaseAction {
         String question = request.getParameter("question");
         String answer   = request.getParameter("answer");
 
-        if (faqId==null)
-        {
+        if (faqId == null) {
             System.out.println("由于参数导致创建失败--faqId 缺失");
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
         }
         FAQ faq = fAQService.FindByID(Integer.parseInt(faqId));
-        if(faq ==null){
+        if (faq == null) {
             System.out.println("更新的FAQ不存在");
             return;
         }
-        faq.setQuestion(question);
-        faq.setAnswer(answer);
+        if( null != question || ("").equals(question)) faq.setQuestion(question);
+        if( null != answer   || ("").equals(answer))   faq.setAnswer(answer);
 
         try {
             fAQService.updateFAQ(faq);
@@ -97,14 +95,13 @@ public class FAQAction extends BaseAction {
         System.out.println("---》deleteFAQ 方法");
         String faqId    = request.getParameter("faqId");
 
-        if (faqId==null)
-        {
+        if (faqId == null) {
             System.out.println("由于参数导致创建失败-- faqId 缺失");
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
         }
         FAQ faq = fAQService.FindByID(Integer.parseInt(faqId));
-        if(faq ==null){
+        if (faq == null) {
             System.out.println("更新的FAQ不存在");
             return;
         }
@@ -131,25 +128,49 @@ public class FAQAction extends BaseAction {
         String pageSize = request.getParameter("pageSize");
         String deleteFlag = request.getParameter("deleteFlag");
 
-        if(pageNo==null || pageSize == null){
+        if (pageNo == null || pageSize == null) {
             System.out.println("由于参数导致创建失败--pageNo / pageSize 缺失");
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
         }
 
         Criterion criterion = null;
-        if(deleteFlag!=null){
-            criterion =  Restrictions.eq("deleteFlag",Integer.parseInt(deleteFlag));
-        }else{
-            criterion =  Restrictions.eq("deleteFlag",0);
+        if (deleteFlag != null) {
+            criterion = Restrictions.eq("deleteFlag", Integer.parseInt(deleteFlag));
+        } else {
+            criterion = Restrictions.eq("deleteFlag", 0);
         }
         pagingFAQService.PagingService(FAQ.class);
-        Pager pager = pagingFAQService.paging(Integer.parseInt(pageNo),Integer.parseInt(pageSize),criterion);
+        Pager pager = pagingFAQService.paging(Integer.parseInt(pageNo), Integer.parseInt(pageSize), criterion);
 
-        System.out.println("数据："+pager.toString());
+        System.out.println("数据：" + pager.toString());
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson(pager));
-        System.out.println("发送数据=="+gson.toJson(pager));
+        System.out.println("发送数据==" + gson.toJson(pager));
+    }
+
+    public void selectFAQById() throws Exception {
+        System.out.println("---》selectFAQById 方法");
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        String FAQID = request.getParameter("FAQID");
+        if (null == FAQID || "".equals(FAQID)) {
+            System.out.print("FAQID 不正确");
+            out.print(CommonKey.PARAMETERDEFICIENCY);
+            return;
+        }
+        FAQ faq = null;
+        try {
+            faq = fAQService.FindByID(Integer.parseInt(FAQID));
+        } catch (Exception e) {
+            System.out.println("深层调用导致登陆失败");
+            out.print(CommonKey.DELETESUCCESS);
+            e.printStackTrace();
+            return;
+        }
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(faq));
     }
 
 }
