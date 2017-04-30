@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      Role:{{role}}
-    </div>
     <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal">
       <router-link :to="'/Home'">
         <el-menu-item index="1">
@@ -29,11 +26,16 @@
           用户管理
         </el-menu-item>
       </router-link>
-      <router-link style="float: right" :to="'/Login'">
+      <router-link style="float: right" :to="'/Login'" v-show="role == 'GUEST'">
         <el-menu-item index="10">
           登陆
         </el-menu-item>
       </router-link>
+      <el-submenu style="float: right" index="11" v-show="role != 'GUEST'">
+        <template slot="title">{{role}}</template>
+        <el-menu-item index="11-1" router="'/'">个人中心</el-menu-item>
+        <el-menu-item index="11-2" @click="logout()">退出</el-menu-item>
+      </el-submenu>
     </el-menu>
     <router-view>
       <div>
@@ -53,7 +55,43 @@
   export default {
     computed: mapGetters([
       'role'
-    ])
+    ]),
+    methods: {
+      logout () {
+        this.$confirm('您确认退出吗？, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.logoutReq()
+        }).catch(() => {
+          this.$notify.info({
+            title: '消息',
+            message: '取消退出!'
+          })
+        })
+      },
+      logoutReq () {
+        var vm = this
+        vm.$http.post('/user/logout').then((response) => {
+          console.log(response)
+          if (response.body === '1105') {
+            this.$notify({
+              title: '成功',
+              message: '退出成功!',
+              type: 'success'
+            })
+            this.$store.commit('setRoleGuest')
+          } else {
+            this.$notify({
+              title: '失败',
+              message: '退出失败!',
+              type: 'warning'
+            })
+          }
+        })
+      }
+    }
   }
 
 </script>
@@ -61,7 +99,8 @@
   body {
     color: #48576a;
   }
+
   a {
-    text-decoration:none
+    text-decoration: none
   }
 </style>
