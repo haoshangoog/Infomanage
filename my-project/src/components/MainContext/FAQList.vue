@@ -13,11 +13,11 @@
         <div class="grid-content bg-purple-light">
           <div v-for="o in FAQList">
             <el-card class="">
-              <!--<router-link :to="'/testPlanForm/'+ o.id">-->
+              <router-link :to="'/FAQForm/'+ o.id">
                 <div class="text item">
                   {{o.question}}
                 </div>
-              <!--</router-link>-->
+              </router-link>
               <div style="float: right">
                 <el-button type="text" @click="editFAQ(o.id, o.question)" v-show="role != 'GUEST'">修改问题</el-button>
                 <el-button type="text" @click="deleteFAQ(o.id)" v-show="role != 'GUEST'">删除问题</el-button>
