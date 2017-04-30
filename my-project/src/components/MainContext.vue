@@ -20,8 +20,13 @@
         </el-menu-item>
       </router-link>
       <router-link :to="'/Login'">
-        <el-menu-item index="10">
+        <el-menu-item index="4">
           文档资料
+        </el-menu-item>
+      </router-link>
+      <router-link :to="'/UserManage'">
+        <el-menu-item index="5">
+          用户管理
         </el-menu-item>
       </router-link>
       <router-link style="float: right" :to="'/Login'">
