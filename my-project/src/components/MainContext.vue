@@ -24,7 +24,7 @@
           文档资料
         </el-menu-item>
       </router-link>
-      <router-link :to="'/UserManage'">
+      <router-link :to="'/UserManage'" v-show="role == 'ADMIN'">
         <el-menu-item index="5">
           用户管理
         </el-menu-item>
