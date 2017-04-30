@@ -33,7 +33,9 @@
       </router-link>
       <el-submenu style="float: right" index="11" v-show="role != 'GUEST'">
         <template slot="title">{{role}}</template>
-        <el-menu-item index="11-1" router="'/'">个人中心</el-menu-item>
+        <router-link :to="'/PersonCenter'" >
+          <el-menu-item index="11-1" >个人中心</el-menu-item>
+        </router-link>
         <el-menu-item index="11-2" @click="logout()">退出</el-menu-item>
       </el-submenu>
     </el-menu>

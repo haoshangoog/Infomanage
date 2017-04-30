@@ -6,6 +6,7 @@ const TestPlanForm = resolve => require(['./components/MainContext/TestPlanForm.
 const FAQList = resolve => require(['./components/MainContext/FAQList.vue'], resolve)
 const FAQForm = resolve => require(['./components/MainContext/FAQForm.vue'], resolve)
 const UserManage = resolve => require(['./components/MainContext/UserManage.vue'], resolve)
+const PersonCenter = resolve => require(['./components/MainContext/PersonCenter.vue'], resolve)
 const Login = resolve => require(['./components/MainContext/Login.vue'], resolve)
 
 export default [
@@ -36,6 +37,10 @@ export default [
       {
         path: '/UserManage',
         component: UserManage
+      },
+      {
+        path: '/PersonCenter',
+        component: PersonCenter
       },
       {
         path: '/Login',
