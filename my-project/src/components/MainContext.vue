@@ -39,10 +39,7 @@
         <el-menu-item index="11-2" @click="logout()">退出</el-menu-item>
       </el-submenu>
     </el-menu>
-    <router-view>
-      <div>
-        11
-      </div>
+    <router-view class="outer-box">
     </router-view>
     <div style="position: fixed;background-color: #323232;width: 100%;height: 100%;
 					text-align: center;z-index: 999;top: 88%;opacity: 0.8;">
@@ -104,5 +101,9 @@
 
   a {
     text-decoration: none
+  }
+
+  .outer-box {
+    padding-bottom: 12%;
   }
 </style>

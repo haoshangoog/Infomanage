@@ -28,7 +28,7 @@ Vue.use(VueResource)
 Vue.http.interceptors.push(function (request, next) {
   // modify request
   request.credentials = true
-  request['url'] = 'http://localhost:8085' + request.url
+  request['url'] = 'http://localhost:8083/infomanage' + request.url
   // request.headers.set('X-CSRF-TOKEN', 'TOKEN')
 
   // continue to next interceptor
