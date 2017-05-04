@@ -42,6 +42,10 @@
               type: 'info',
               message: '登陆失败'
             })
+            this.$message({
+              type: 'info',
+              message: '登录失败！'
+            })
             return null
           } else {
             return response.json()
@@ -58,12 +62,12 @@
             } else {
               this.$store.commit('setRoleGuest')
             }
+            this.$message({
+              type: 'info',
+              message: '登录成功'
+            })
+            this.$router.push('/TestPlanList')
           }
-          this.$message({
-            type: 'info',
-            message: '登录成功'
-          })
-          this.$router.push('/TestPlanList')
         })
       }
     }
