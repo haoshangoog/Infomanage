@@ -55,9 +55,9 @@
             this.$store.commit('setRoleGuest')
           } else {
             var identity = json.identity
-            if (identity === 1) {
+            if (identity === '1') {
               this.$store.commit('setRoleUser')
-            } else if (identity === 2) {
+            } else if (identity === '2') {
               this.$store.commit('setRoleAdmin')
             } else {
               this.$store.commit('setRoleGuest')
