@@ -43,7 +43,7 @@
                 <el-input v-model="password.confirm"></el-input>
               </el-form-item>
             </el-form>
-            <el-button type="primary" @click="">确认修改密码</el-button>
+            <el-button type="primary" @click="handleUpdatePassword()">确认修改密码</el-button>
           </div>
 
         </div>
@@ -84,7 +84,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.resetPasswordReq()
+          this.UpdateUserInfoReq()
         }).catch(() => {
           this.$notify.info({
             title: '消息',
@@ -124,16 +124,16 @@
             return
           })
         }
-        this.$confirm('您确定更新您的个人信息吗？', '提示', {
+        this.$confirm('您确定更新您的密码吗？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.resetPasswordReq()
+          this.UpdatePasswordReq()
         }).catch(() => {
           this.$notify.info({
             title: '消息',
-            message: '取消更新个人信息'
+            message: '取消更新密码'
           })
         })
       },
@@ -164,14 +164,7 @@
         vm.$http.post('/user/isLogin').then((response) => {
           return response.json()
         }).then((json) => {
-          vm.currentUserInfo = {
-            'id': 2,
-            'accountName': 'admin',
-            'realName': '杨杨毅',
-            'password': 'admin',
-            'identity': '2',
-            'deleteFlag': '0'
-          }
+          vm.currentUserInfo = json
         })
       }
     }
