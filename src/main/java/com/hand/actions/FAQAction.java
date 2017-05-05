@@ -1,7 +1,5 @@
 package com.hand.actions;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hand.commonKey.CommonKey;
 import com.hand.entity.FAQ;
 import com.hand.paging.Pager;
@@ -144,7 +142,6 @@ public class FAQAction extends BaseAction {
         Pager pager = pagingFAQService.paging(Integer.parseInt(pageNo), Integer.parseInt(pageSize), criterion);
 
         System.out.println("数据：" + pager.toString());
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson(pager));
         System.out.println("发送数据==" + gson.toJson(pager));
     }
@@ -169,7 +166,6 @@ public class FAQAction extends BaseAction {
             e.printStackTrace();
             return;
         }
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson(faq));
     }
 

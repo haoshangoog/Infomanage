@@ -1,7 +1,5 @@
 package com.hand.actions;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hand.commonKey.CommonKey;
 import com.hand.entity.User;
 import com.hand.paging.Pager;
@@ -165,7 +163,7 @@ public class UserAction extends BaseAction {
         for (Object user: pager.getResult()){
             System.out.println("user --->：  "+((User)user).toString());
         }
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
         out.print(gson.toJson(pager));
         System.out.println("发送数据=="+gson.toJson(pager));
     }
@@ -190,7 +188,6 @@ public class UserAction extends BaseAction {
             e.printStackTrace();
             return;
         }
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         out.print(gson.toJson((User)user));
     }
 
@@ -209,7 +206,7 @@ public class UserAction extends BaseAction {
             out.print(CommonKey.PARAMETERDEFICIENCY);
             return;
         }
-        String sql = "SELECT * FROM user WHERE accountName='"+accountName+"' AND password = '"+password+"';";
+        String sql = "SELECT * FROM user WHERE accountName='"+accountName+"' AND password = '"+password+"'AND deleteflag = 0;";
         List<User> userList = null;
         try {
             userList = userService.FindBySQL(sql);
@@ -223,7 +220,6 @@ public class UserAction extends BaseAction {
             System.out.println("登陆成功");
             session.put("user",userList.get(0));
 //            out.print(CommonKey.LOGINSUCCESS); // 登陆成功
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             out.print(gson.toJson((User)session.get("user")));
         }else {
             System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");
@@ -258,7 +254,6 @@ public class UserAction extends BaseAction {
             out.print(CommonKey.NOTLOGIN); // 用户没有进行登陆
         }else{
             System.out.println("用户已经登陆");
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             out.print(gson.toJson((User)session.get("user")));
         }
     }
