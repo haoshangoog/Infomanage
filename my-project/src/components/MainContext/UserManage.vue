@@ -83,10 +83,10 @@
           <div class="block">
             <el-pagination
               @current-change="handleCurrentChange"
-              :current-page="page.currentPage"
-              :page-size="page.pageSize"
-              layout="prev, pager, next"
-              :total="page.total">
+              :current-page="getPage.currentPage"
+              :page-size="getPage.pageSize"
+              :total="getPage.total"
+              layout="prev, pager, next">
             </el-pagination>
           </div>
         </div>
@@ -97,8 +97,8 @@
             </el-form-item>
             <el-form-item label="权限">
               <el-select v-model="currentUserInfo.identity" placeholder="请选择权限">
-                <el-option label="普通用户" value=1></el-option>
-                <el-option label="管理员" value=2></el-option>
+                <el-option label="普通用户" value="1"></el-option>
+                <el-option label="管理员" value="2"></el-option>
               </el-select>
             </el-form-item>
           </el-form>
@@ -129,9 +129,16 @@
         }
       }
     },
-    computed: mapGetters([
-      'role'
-    ]),
+    computed: {
+      ...mapGetters(['role']),
+      getPage () {
+        return {
+          'currentPage': Number(this.page.currentPage),
+          'pageSize': Number(this.page.pageSize),
+          'total': Number(this.page.total)
+        }
+      }
+    },
     mounted () {
       this.getUserPageList(1)
     },

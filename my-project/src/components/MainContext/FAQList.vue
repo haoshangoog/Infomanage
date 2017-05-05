@@ -27,10 +27,10 @@
           <div class="block">
             <el-pagination
               @current-change="handleCurrentChange"
-              :current-page="page.currentPage"
-              :page-size="page.pageSize"
+              :current-page="getPage.currentPage"
+              :page-size="getPage.pageSize"
               layout="prev, pager, next"
-              :total="page.total">
+              :total="getPage.total">
             </el-pagination>
           </div>
         </div>
@@ -55,9 +55,16 @@
         }
       }
     },
-    computed: mapGetters([
-      'role'
-    ]),
+    computed: {
+      ...mapGetters(['role']),
+      getPage () {
+        return {
+          'currentPage': Number(this.page.currentPage),
+          'pageSize': Number(this.page.pageSize),
+          'total': Number(this.page.total)
+        }
+      }
+    },
     mounted () {
       this.getFAQPageList(1)
     },

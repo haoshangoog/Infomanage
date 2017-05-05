@@ -15,7 +15,7 @@
             <i class="el-icon-message"></i>添加目录
           </el-menu-item>
           <el-menu-item-group title="目录">
-            <el-tree :data="allCatalogue" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            <el-tree :data="allCatalogueExceptRoot" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
           </el-menu-item-group>
         </el-menu>
       </el-col>
@@ -292,6 +292,20 @@
     },
     computed: {
       ...mapGetters(['role']),
+      catalogueRootId () {
+        if (this.allCatalogue.length !== 0) {
+          return this.allCatalogue[0].id
+        } else {
+          return -1
+        }
+      },
+      allCatalogueExceptRoot () {
+        if (this.allCatalogue.length === 0) {
+          return []
+        } else {
+          return this.allCatalogue[0]['children']
+        }
+      },
       catalogueSelect () {
         // 父级目录可选择的有1. 根目录 2. 当前目录 3. 子目录
         var vm = this
@@ -309,7 +323,7 @@
       },
       addCatalogue () {
         this.testPlanForm = {
-          'id': 0,
+          'id': -1,
           'catalogueName': '',
           'parentsId': 0,
           'sequence': 0,
@@ -341,6 +355,9 @@
         vm.$http.post(apiUrl, formData).then((response) => {
           return response.json()
         }).then((json) => {
+          if (json.length === 0) {
+            console.log('请求目录信息出错')
+          }
           vm.allCatalogue = json
         })
       },
