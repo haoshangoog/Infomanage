@@ -113,17 +113,10 @@
                 <div class="">父级目录</div>
               </el-col>
               <el-col :xs="12" :sm="12" :md="12" :lg="6">
-                <el-select v-model="testPlanForm.parentsId" placeholder="请选择">
-                  <el-option-group
-                    v-for="group in catalogueSelect"
-                    :label="group.label">
-                    <el-option
-                      v-for="item in group.options"
-                      :label="item.catalogueName"
-                      :value="item.id">
-                    </el-option>
-                  </el-option-group>
-                </el-select>
+                <el-cascader placeholder="请选择目录" :options="allCatalogue" :props="defaultProps" filterable
+                             change-on-select v-model="selectedOptions">
+                </el-cascader>
+                {{test}}
               </el-col>
             </el-row>
             <el-row :gutter="20">
@@ -283,22 +276,19 @@
             }
           }
         },
+        allCatalogueOld: [],
         allCatalogue: [],
         defaultProps: {
           children: 'children',
-          label: 'catalogueName'
-        }
+          label: 'catalogueName',
+          value: 'id'
+        },
+        selectedOptions: ['9', '47'],
+        testArry: []
       }
     },
     computed: {
       ...mapGetters(['role']),
-      catalogueRootId () {
-        if (this.allCatalogue.length !== 0) {
-          return this.allCatalogue[0].id
-        } else {
-          return -1
-        }
-      },
       allCatalogueExceptRoot () {
         if (this.allCatalogue.length === 0) {
           return []
@@ -306,10 +296,14 @@
           return this.allCatalogue[0]['children']
         }
       },
-      catalogueSelect () {
-        // 父级目录可选择的有1. 根目录 2. 当前目录 3. 子目录
-        var vm = this
-        return vm.jsonTree(vm.allCatalogue, vm.testPlanForm.parentsId)
+      test () {
+        var t = this.testPlanForm
+        console.log('-----------------' + t)
+        console.log(this.allCatalogueOld)
+        this.getSelectedOptions(this.allCatalogueOld, this.testPlanForm.id)
+        console.log('结果………………………………………………')
+        console.log(this.testArry)
+        this.selectedOptions = this.testArry
       }
     },
 
@@ -325,7 +319,7 @@
         this.testPlanForm = {
           'id': -1,
           'catalogueName': '',
-          'parentsId': 0,
+          'parentsId': this.selectedOptions[this.selectedOptions.length - 1],
           'sequence': 0,
           'testPlanId': this.testPlanId,
           'testPlanContextId': 0,
@@ -358,6 +352,7 @@
           if (json.length === 0) {
             console.log('请求目录信息出错')
           }
+          vm.allCatalogueOld = json
           vm.allCatalogue = json
         })
       },
@@ -415,43 +410,33 @@
           console.log(response)
         })
       },
-      // 内容部分 END
-      jsonTree (jsonTree, value, root) {
-        if (jsonTree.length === 0) {
-          return
-        }
-        var array = []
-        if ((typeof jsonTree === 'object') && (jsonTree.constructor === Object.prototype.constructor)) {
-          array.push(jsonTree)
-        } else {
-          array = jsonTree
-        }
-        if (!root) {
-          root = array[0].parentsId
-          if (Number(value) === root || Number(value) === 0) {
-            var s = []
-            this.testPlanForm.parentsId = root
-            s.push({label: '根目录', options: [{'catalogueName': '根目录', 'id': root}]})
-            s.push({label: '子目录', options: array})
-            return s
+      getSelectedOptions (jsonTree, id) {
+        this.testArry = []
+        this.testArry = this.testArry.concat([id])
+        for (var i = 0; i < 10000; i++) {
+          var old = this.testArry
+          this.searchCatalogue(jsonTree, this.testArry[this.testArry.length - 1])
+          if (old.length === this.testArry.length) {
+            this.testArry = this.testArry.reverse()
+            break
           }
         }
-        var result = []
-        for (var i = 0; i < array.length; i++) {
-          var jn = array[i]
-          if (jn.id === Number(value)) {
-            result.push({label: '根目录', options: [{'catalogueName': '根目录', 'id': root}]})
-            result.push({label: '当前目录', options: [{'catalogueName': jn.catalogueName, 'id': jn.id}]})
-            result.push({label: '子目录', options: jn.children})
-            return result
-          } else if (jn.children && jn.children.length > 0) {
-            result = this.jsonTree(jn.children, value, root)
-          }
-          if (result.length !== 0) {
-            return result
+      },
+      searchCatalogue (jsonTree, id) {
+        var vm = this
+        for (var i = 0; i < jsonTree.length; i++) {
+          var value = jsonTree[i]
+          if (value.id === id) {
+            if (value.parentsId !== '0') {
+              var valueId = [value.parentsId]
+              vm.testArry = vm.testArry.concat(valueId)
+            }
+          } else {
+            if (value.children.length !== 0) {
+              vm.searchCatalogue(value.children, id)
+            }
           }
         }
-        return result
       }
     }
   }
@@ -463,12 +448,15 @@
     background: rgba(255, 255, 255, 0);
     border: none;
   }
+
   .el-row {
     padding: 2px;
   }
+
   .show {
     font-size: 16px;
   }
+
   .show .el-row {
     padding: 10px;
     border-bottom: 1px solid rgba(50, 50, 50, 0.26);
